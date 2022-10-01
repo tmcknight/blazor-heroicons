@@ -1,0 +1,46 @@
+@using System.Reflection
+@inherits HeroiconBase
+
+<DynamicComponent Type="_razorComponentType" Parameters="_attributes"></DynamicComponent>
+
+@code {
+    [Parameter]
+    public string Name { get; set; } = "AcademicCap";
+    [Parameter]
+    public IconType Type { get; set; } = IconType.Solid;
+
+    private Type _razorComponentType = typeof(Solid.AcademicCap);
+    private Dictionary<string, object> _attributes => new()
+    {
+        { "AdditionalAttributes", AdditionalAttributes }
+    };
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        var name = Name.Replace("-", "").Trim();
+
+        //find icon based on name and type
+        if (_razorComponentType is null || _razorComponentType.Name != name)
+        {
+            var module = Type switch
+            {
+                IconType.Solid => typeof(Solid.AcademicCap).Assembly.GetModules()[0],
+                IconType.Outline => typeof(Outline.AcademicCap).Assembly.GetModules()[0],
+                IconType.Mini => typeof(Mini.AcademicCap).Assembly.GetModules()[0],
+                _ => throw new Exception("Unknown Heroicon.IconType")
+            };
+            _razorComponentType = module.GetType($"Blazor.Heroicons.{Type}.{name}", true)!;
+        }
+
+        if (_razorComponentType is null)
+            throw new Exception($"Heroicon '{Type}.{name}' not found");
+    }
+
+    public enum IconType
+    {
+        Solid,
+        Outline,
+        Mini
+    }
+}

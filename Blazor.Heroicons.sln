@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{37817D12-C860-4FB5-AFB9-4CE60FC6F697}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Heroicons", "src\Blazor.Heroicons\Blazor.Heroicons.csproj", "{387C4A8A-3869-4EAF-BDD3-9D44F345A977}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "src\Demo\Demo.csproj", "{786E4310-B9E9-48C2-A6A1-53C91FC81E57}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{387C4A8A-3869-4EAF-BDD3-9D44F345A977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{387C4A8A-3869-4EAF-BDD3-9D44F345A977}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{387C4A8A-3869-4EAF-BDD3-9D44F345A977}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{387C4A8A-3869-4EAF-BDD3-9D44F345A977}.Release|Any CPU.Build.0 = Release|Any CPU
+		{786E4310-B9E9-48C2-A6A1-53C91FC81E57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{786E4310-B9E9-48C2-A6A1-53C91FC81E57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{786E4310-B9E9-48C2-A6A1-53C91FC81E57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{786E4310-B9E9-48C2-A6A1-53C91FC81E57}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{387C4A8A-3869-4EAF-BDD3-9D44F345A977} = {37817D12-C860-4FB5-AFB9-4CE60FC6F697}
+		{786E4310-B9E9-48C2-A6A1-53C91FC81E57} = {37817D12-C860-4FB5-AFB9-4CE60FC6F697}
+	EndGlobalSection
+EndGlobal

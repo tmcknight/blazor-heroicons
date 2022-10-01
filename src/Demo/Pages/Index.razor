@@ -1,0 +1,19 @@
+﻿@page "/"
+@using Blazor.Heroicons.Solid
+@using Blazor.Heroicons
+
+<PageTitle>Index</PageTitle>
+
+<AcademicCap></AcademicCap>
+
+<Heroicon Name="adjustments-horizontal" Type="Heroicon.IconType.Outline"></Heroicon>
+
+@code {
+    [CascadingParameter]
+    public MainLayout MainLayout { get; set; }
+    protected override void OnInitialized()
+    {
+        if (MainLayout is not null)
+            MainLayout.PageHeading = "Heroicons";
+    }
+}
