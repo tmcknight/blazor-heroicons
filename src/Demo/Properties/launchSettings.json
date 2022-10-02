@@ -10,7 +10,6 @@
   "profiles": {
     "Demo": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7098;http://localhost:5081",
       "environmentVariables": {
