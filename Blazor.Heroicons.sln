@@ -9,6 +9,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Heroicons", "src\Bla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "src\Demo\Demo.csproj", "{786E4310-B9E9-48C2-A6A1-53C91FC81E57}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3E41A27C-AD1B-48D3-9FA2-6D4715A51D61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Heroicons.Tests", "tests\Blazor.Heroicons.Tests\Blazor.Heroicons.Tests.csproj", "{08894048-7D6A-43FC-A3D0-E28AC950BEF3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0B5BB6E7-0A47-4C70-A204-EFFD16C8760C}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{C74938D5-541E-4B37-8543-A757CABADB32}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\get-latest-heroicons.py = scripts\get-latest-heroicons.py
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +42,14 @@ Global
 		{786E4310-B9E9-48C2-A6A1-53C91FC81E57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{786E4310-B9E9-48C2-A6A1-53C91FC81E57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{786E4310-B9E9-48C2-A6A1-53C91FC81E57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08894048-7D6A-43FC-A3D0-E28AC950BEF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08894048-7D6A-43FC-A3D0-E28AC950BEF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08894048-7D6A-43FC-A3D0-E28AC950BEF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08894048-7D6A-43FC-A3D0-E28AC950BEF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{387C4A8A-3869-4EAF-BDD3-9D44F345A977} = {37817D12-C860-4FB5-AFB9-4CE60FC6F697}
 		{786E4310-B9E9-48C2-A6A1-53C91FC81E57} = {37817D12-C860-4FB5-AFB9-4CE60FC6F697}
+		{08894048-7D6A-43FC-A3D0-E28AC950BEF3} = {3E41A27C-AD1B-48D3-9FA2-6D4715A51D61}
 	EndGlobalSection
 EndGlobal
