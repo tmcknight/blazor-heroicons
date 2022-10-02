@@ -16,3 +16,10 @@ public abstract class HeroiconBase : ComponentBase
             AdditionalAttributes.Add("class", s_defaultCssClass);
     }
 }
+
+public enum HeroiconType
+{
+    Solid,
+    Outline,
+    Mini
+}

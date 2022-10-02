@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{37817D12-C86
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Heroicons", "src\Blazor.Heroicons\Blazor.Heroicons.csproj", "{387C4A8A-3869-4EAF-BDD3-9D44F345A977}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "src\Demo\Demo.csproj", "{786E4310-B9E9-48C2-A6A1-53C91FC81E57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDemo", "src\BlazorDemo\BlazorDemo.csproj", "{786E4310-B9E9-48C2-A6A1-53C91FC81E57}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3E41A27C-AD1B-48D3-9FA2-6D4715A51D61}"
 EndProject

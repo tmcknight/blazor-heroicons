@@ -1,14 +1,13 @@
-@using System.Reflection
 @inherits HeroiconBase
 
 <DynamicComponent Type="_razorComponentType" Parameters="_attributes"></DynamicComponent>
 
 @code {
     [Parameter]
-    public string Name { get; set; } = "Sparkles";
+    public string Name { get; set; } = "SparklesIcon";
     [Parameter]
-    public IconType Type { get; set; } = IconType.Solid;
-
+    public HeroiconType Type { get; set; } = HeroiconType.Outline;
+    private HeroiconType _heroiconType;
     private Type _razorComponentType = typeof(Solid.SparklesIcon);
     private Dictionary<string, object> _attributes => new()
     {
@@ -18,29 +17,26 @@
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-        //remove hyphens and trim name
-        var name = Name.Replace("-", "").Trim();
+        //remove hyphens and spaces
+        var name = Name.Replace("-", "").Replace(" ", "");
         //add icon suffix, if not included
         if (!name.ToLower().EndsWith("icon"))
         {
             name = $"{name}Icon";
         }
 
-        //find icon based on name and type
-        if (_razorComponentType is null || _razorComponentType.Name != name)
+        //check to see if the icon parameters have changed
+        if (_razorComponentType is null ||
+        _razorComponentType.Name.ToLower() != name.ToLower() ||
+        _heroiconType != Type)
         {
-            var module = typeof(Solid.SparklesIcon).Assembly.GetModules()[0];
-            _razorComponentType = module.GetType($"Blazor.Heroicons.{Type}.{name}", true)!;
+            //find icon based on name and type
+            _razorComponentType = System.Type.GetType($"Blazor.Heroicons.{Type}.{name}", true, true)!;
+            _heroiconType = Type;
         }
 
         if (_razorComponentType is null)
             throw new Exception($"Heroicon '{Type}.{name}' not found");
     }
 
-    public enum IconType
-    {
-        Solid,
-        Outline,
-        Mini
-    }
 }
