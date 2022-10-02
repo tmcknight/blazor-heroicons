@@ -31,6 +31,9 @@ def main():
             remote_file.info()['Content-Disposition'])
         tar_filename = params["filename"]
 
+    # update heroicons version link in readme
+    update_readme_heroicons_version(version)
+
     # create tmp directory
     Path("tmp").mkdir(exist_ok=True)
     tar_filename = f"tmp/{tar_filename}"
@@ -91,6 +94,24 @@ def optimized_files(members, root):
 def to_pascal_case(text):
     s = text.replace("-", " ").replace("_", " ")
     return "".join(s.title().split())
+
+
+def update_readme_heroicons_version(version_tag):
+    print("Updating heroicons version badge...")
+    version_badge = ("[![Heroicons version]"
+                     f"(https://img.shields.io/badge/heroicons-{version_tag}-informational?style=flat-square)]"
+                     f"(https://github.com/tailwindlabs/heroicons/releases/tag/{version_tag})"
+                     "\n")
+
+    # read readme file
+    with open("README.md", "r") as readme_file:
+        lines = readme_file.readlines()
+        for i in range(len(lines)):
+            if lines[i].startswith("[![Heroicons version]"):
+                lines[i] = version_badge
+
+    with open("README.md", "w") as readme_file:
+        readme_file.writelines(lines)
 
 
 if __name__ == "__main__":
