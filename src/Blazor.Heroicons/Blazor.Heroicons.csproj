@@ -14,12 +14,14 @@
     <PackageDescription>A third-party Blazor component library for Heroicons.</PackageDescription>
     <Description>A third-party Blazor component library for Heroicons.</Description>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Heroicons Icons Tailwind TailwindCSS Blazor</PackageTags>
+    <PackageTags>Heroicons;Icons;Tailwind;TailwindCSS;Blazor</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
+    <None Include="../../icon.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 
   <ItemGroup>
