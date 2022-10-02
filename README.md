@@ -2,9 +2,9 @@
 
 A third-party Blazor component library for [Heroicons](https://heroicons.com).
 
-![Nuget](https://img.shields.io/nuget/v/Blazor.Heroicons?style=flat-square&logo=nuget)
+[![Nuget package](https://img.shields.io/nuget/v/Blazor.Heroicons?style=flat-square&logo=nuget)](https://www.nuget.org/packages/Blazor.Heroicons)
 [![Heroicons version](https://img.shields.io/badge/heroicons-v2.0.11-informational?style=flat-square)](https://github.com/tailwindlabs/heroicons/releases/tag/v2.0.11)
-![GitHub](https://img.shields.io/github/license/tmcknight/Blazor.Heroicons?style=flat-square)
+[![License](https://img.shields.io/github/license/tmcknight/Blazor.Heroicons?style=flat-square)](LICENSE)
 
 ## Basic Usage
 
