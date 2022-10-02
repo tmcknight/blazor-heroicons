@@ -5,11 +5,11 @@
 
 @code {
     [Parameter]
-    public string Name { get; set; } = "AcademicCap";
+    public string Name { get; set; } = "Sparkles";
     [Parameter]
     public IconType Type { get; set; } = IconType.Solid;
 
-    private Type _razorComponentType = typeof(Solid.AcademicCap);
+    private Type _razorComponentType = typeof(Solid.SparklesIcon);
     private Dictionary<string, object> _attributes => new()
     {
         { "AdditionalAttributes", AdditionalAttributes }
@@ -18,12 +18,18 @@
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
+        //remove hyphens and trim name
         var name = Name.Replace("-", "").Trim();
+        //add icon suffix, if not included
+        if (!name.ToLower().EndsWith("icon"))
+        {
+            name = $"{name}Icon";
+        }
 
         //find icon based on name and type
         if (_razorComponentType is null || _razorComponentType.Name != name)
         {
-            var module = typeof(Solid.AcademicCap).Assembly.GetModules()[0];
+            var module = typeof(Solid.SparklesIcon).Assembly.GetModules()[0];
             _razorComponentType = module.GetType($"Blazor.Heroicons.{Type}.{name}", true)!;
         }
 

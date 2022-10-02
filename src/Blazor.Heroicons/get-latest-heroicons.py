@@ -6,20 +6,13 @@ from pathlib import Path
 import cgi
 import shutil
 import tarfile
-from venv import create
 
 
 def main():
-    # clean up prior runs
+    # clean up prior run, if required
     if Path("tmp").exists():
         print("Cleaning up existing tmp files...")
         shutil.rmtree("tmp")
-
-    # create required directories
-    Path("Solid").mkdir(exist_ok=True)
-    Path("Outline").mkdir(exist_ok=True)
-    Path("Mini").mkdir(exist_ok=True)
-    Path("tmp").mkdir(exist_ok=True)
 
     # get latest release info
     print("Getting latest release info...")
@@ -35,12 +28,13 @@ def main():
             remote_file.info()['Content-Disposition'])
         tar_filename = params["filename"]
 
+    # create tmp directory
+    Path("tmp").mkdir(exist_ok=True)
     tar_filename = f"tmp/{tar_filename}"
     urllib.request.urlretrieve(download_url, tar_filename)
     print(f"Downloaded latest release to {tar_filename}")
 
     # extract tar
-
     print("Extracting tar file...")
     tar = tarfile.open(tar_filename)
     tar.extractall(members=optimized_files(
@@ -61,8 +55,13 @@ def main():
 
 def create_blazor_component_files(icon_type, glob):
     print(f"Creating {icon_type} razor components...")
+
+    # remove all existing components
+    shutil.rmtree(icon_type)
+    Path(icon_type).mkdir(exist_ok=True)
+
+    # loop through svg files
     file_list = [f for f in iglob(glob, recursive=True) if os.path.isfile(f)]
-    count = 0
     for file in file_list:
         content = ""
         # convert svg content to blazor component
@@ -73,11 +72,10 @@ def create_blazor_component_files(icon_type, glob):
                                       "aria-hidden=\"true\" @attributes=\"AdditionalAttributes\">")
 
         # write file
-        with open(f"{icon_type}/{to_title_case(Path(file).stem)}.razor", 'w') as blazor_component:
+        with open(f"{icon_type}/{to_title_case(Path(file).stem)}Icon.razor", 'w') as blazor_component:
             blazor_component.write(content)
 
-        count = count + 1
-    print(f"Created {count} {icon_type} razor components")
+    print(f"Created {len(file_list)} {icon_type} razor components")
 
 
 def optimized_files(members, root):

@@ -14,48 +14,55 @@
 
 <main class="-mt-32">
     <div class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-        <div class="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-
-                <div
-                    class="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-x-6 gap-y-8 pt-10 pb-16 sm:pt-11 md:pt-12">
-                    @foreach (var icon in IconTypes)
-                    {
-                        <div>
-                            <div class="relative h-[8.5rem]"><button type="button" id="@(icon.Name)-btn"
-                                aria-label="@(icon.Name)" aria-haspopup="true" aria-controls="@(icon.Name)"
-                                aria-expanded="false"
-                                class="absolute inset-0 flex h-full w-full cursor-auto items-center justify-center rounded-xl text-slate-900 ring-1 ring-inset ring-slate-900/[0.08]"><span
-                                    class="transition-transform duration-500 ease-in-out">
-                                        <DynamicComponent Type="icon"></DynamicComponent>
-                                    </span></button></div>
-                            <div class="mt-3 truncate text-center text-[0.8125rem] leading-6 text-slate-500"
-                            title="@(icon.Name)">@icon.Name</div>
-                        </div>
-                    }
+        <div class="rounded-lg bg-white px-5 py-6 shadow sm:px-6 grid grid-cols-3 gap-6">
+            <div>
+                <div>
+                    <Blazor.Heroicons.Outline.HandThumbUpIcon class="h-10 w-10 mx-auto" />
+                </div>
+                <div class="bg-gray-100 rounded px-3 py-1 text-gray-800 text-xs mt-2 w-full">
+                    &lt;Blazor.Heroicons.Outline.HandThumbUpIcon /&gt;
                 </div>
             </div>
-
+            <div>
+                <div>
+                    <Blazor.Heroicons.Solid.HandThumbUpIcon class="h-10 w-10 mx-auto" />
+                </div>
+                <div class="bg-gray-100 rounded px-3 py-1 text-gray-800 text-xs mt-2 w-full">
+                    &lt;Blazor.Heroicons.Solid.HandThumbUpIcon /&gt;
+                </div>
+            </div>
+            <div>
+                <div>
+                    <Blazor.Heroicons.Mini.HandThumbUpIcon class="h-10 w-10 mx-auto" />
+                </div>
+                <div class="bg-gray-100 rounded px-3 py-1 text-gray-800 text-xs mt-2 w-full">
+                    &lt;Blazor.Heroicons.Mini.HandThumbUpIcon /&gt;
+                </div>
+            </div>
+            <div>
+                <div>
+                    <Heroicon Name="sparkles" Type="Heroicon.IconType.Outline" class="h-10 w-10 mx-auto" />
+                </div>
+                <div class="bg-gray-100 rounded px-3 py-1 text-gray-800 text-xs mt-2 w-full">
+                    &lt;Heroicon Name="sparkles" Type="Heroicon.IconType.Outline" /&gt;
+                </div>
+            </div>
+            <div>
+                <div>
+                    <Heroicon Name="sparkles" Type="Heroicon.IconType.Solid" class="h-10 w-10 mx-auto" />
+                </div>
+                <div class="bg-gray-100 rounded px-3 py-1 text-gray-800 text-xs mt-2 w-full">
+                    &lt;Heroicon Name="sparkles" Type="Heroicon.IconType.Solid" /&gt;
+                </div>
+            </div>
+            <div>
+                <div>
+                    <Heroicon Name="sparkles" Type="Heroicon.IconType.Mini" class="h-10 w-10 mx-auto" />
+                </div>
+                <div class="bg-gray-100 rounded px-3 py-1 text-gray-800 text-xs mt-2 w-full">
+                    &lt;Heroicon Name="sparkles" Type="Heroicon.IconType.Mini" /&gt;
+                </div>
+            </div>
         </div>
     </div>
 </main>
-
-@code {
-    protected Heroicon.IconType IconType = Heroicon.IconType.Outline;
-    protected List<Type> IconTypes = new();
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        GetIcons(IconType);
-    }
-
-    protected void GetIcons(Heroicon.IconType iconType)
-    {
-        IconTypes = AppDomain.CurrentDomain.GetAssemblies()
-        .SelectMany(t => t.GetTypes())
-        .Where(t => t.IsClass && t.Namespace == $"Blazor.Heroicons.{iconType}")
-        .ToList();
-    }
-}
