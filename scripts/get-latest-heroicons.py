@@ -9,6 +9,9 @@ import tarfile
 
 
 def main():
+    # move to project root
+    os.chdir("..")
+
     # clean up prior run, if required
     if Path("tmp").exists():
         print("Cleaning up existing tmp files...")
@@ -49,7 +52,7 @@ def main():
     create_blazor_component_files("Outline", "tmp/**/24/outline/*.svg")
 
     # clean up
-    print("Cleaning up tmp files...")
+    print("Cleaning up temp files...")
     shutil.rmtree("tmp")
 
 
@@ -57,8 +60,9 @@ def create_blazor_component_files(icon_type, glob):
     print(f"Creating {icon_type} razor components...")
 
     # remove all existing components
-    shutil.rmtree(icon_type)
-    Path(icon_type).mkdir(exist_ok=True)
+    componentDir = f"src/Blazor.Heroicons/{icon_type}"
+    shutil.rmtree(componentDir)
+    Path(componentDir).mkdir(exist_ok=True)
 
     # loop through svg files
     file_list = [f for f in iglob(glob, recursive=True) if os.path.isfile(f)]
@@ -72,7 +76,7 @@ def create_blazor_component_files(icon_type, glob):
                                       "aria-hidden=\"true\" @attributes=\"AdditionalAttributes\">")
 
         # write file
-        with open(f"{icon_type}/{to_title_case(Path(file).stem)}Icon.razor", 'w') as blazor_component:
+        with open(f"{componentDir}/{to_pascal_case(Path(file).stem)}Icon.razor", 'w') as blazor_component:
             blazor_component.write(content)
 
     print(f"Created {len(file_list)} {icon_type} razor components")
@@ -84,12 +88,9 @@ def optimized_files(members, root):
             yield tarinfo
 
 
-def to_title_case(text):
+def to_pascal_case(text):
     s = text.replace("-", " ").replace("_", " ")
-    s = s.split()
-    if len(text) == 0:
-        return text
-    return s[0].capitalize() + ''.join(i.capitalize() for i in s[1:])
+    return "".join(s.title().split())
 
 
 if __name__ == "__main__":
