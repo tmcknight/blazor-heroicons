@@ -1,19 +1,61 @@
 ﻿@page "/"
-@using Blazor.Heroicons.Solid
 @using Blazor.Heroicons
 
 <PageTitle>Index</PageTitle>
 
-<AcademicCap></AcademicCap>
 
-<Heroicon Name="adjustments-horizontal" Type="Heroicon.IconType.Outline"></Heroicon>
+<div class="bg-indigo-600 pb-32">
+    <header class="py-10">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold tracking-tight text-white">Blazor.Heroicons</h1>
+        </div>
+    </header>
+</div>
+
+<main class="-mt-32">
+    <div class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+        <div class="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+
+                <div
+                    class="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-x-6 gap-y-8 pt-10 pb-16 sm:pt-11 md:pt-12">
+                    @foreach (var icon in IconTypes)
+                    {
+                        <div>
+                            <div class="relative h-[8.5rem]"><button type="button" id="@(icon.Name)-btn"
+                                aria-label="@(icon.Name)" aria-haspopup="true" aria-controls="@(icon.Name)"
+                                aria-expanded="false"
+                                class="absolute inset-0 flex h-full w-full cursor-auto items-center justify-center rounded-xl text-slate-900 ring-1 ring-inset ring-slate-900/[0.08]"><span
+                                    class="transition-transform duration-500 ease-in-out">
+                                        <DynamicComponent Type="icon"></DynamicComponent>
+                                    </span></button></div>
+                            <div class="mt-3 truncate text-center text-[0.8125rem] leading-6 text-slate-500"
+                            title="@(icon.Name)">@icon.Name</div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
 
 @code {
-    [CascadingParameter]
-    public MainLayout MainLayout { get; set; }
+    protected Heroicon.IconType IconType = Heroicon.IconType.Outline;
+    protected List<Type> IconTypes = new();
+
     protected override void OnInitialized()
     {
-        if (MainLayout is not null)
-            MainLayout.PageHeading = "Heroicons";
+        base.OnInitialized();
+        GetIcons(IconType);
+    }
+
+    protected void GetIcons(Heroicon.IconType iconType)
+    {
+        IconTypes = AppDomain.CurrentDomain.GetAssemblies()
+        .SelectMany(t => t.GetTypes())
+        .Where(t => t.IsClass && t.Namespace == $"Blazor.Heroicons.{iconType}")
+        .ToList();
     }
 }

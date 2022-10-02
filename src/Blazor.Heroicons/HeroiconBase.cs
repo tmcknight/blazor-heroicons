@@ -4,7 +4,7 @@ namespace Blazor.Heroicons;
 
 public abstract class HeroiconBase : ComponentBase
 {
-    private static string s_defaultCssClass = "h-8 w-8";
+    private static string s_defaultCssClass = "h-6 w-6";
 
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> AdditionalAttributes { get; set; } = new();

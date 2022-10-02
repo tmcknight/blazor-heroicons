@@ -23,13 +23,7 @@
         //find icon based on name and type
         if (_razorComponentType is null || _razorComponentType.Name != name)
         {
-            var module = Type switch
-            {
-                IconType.Solid => typeof(Solid.AcademicCap).Assembly.GetModules()[0],
-                IconType.Outline => typeof(Outline.AcademicCap).Assembly.GetModules()[0],
-                IconType.Mini => typeof(Mini.AcademicCap).Assembly.GetModules()[0],
-                _ => throw new Exception("Unknown Heroicon.IconType")
-            };
+            var module = typeof(Solid.AcademicCap).Assembly.GetModules()[0];
             _razorComponentType = module.GetType($"Blazor.Heroicons.{Type}.{name}", true)!;
         }
 
