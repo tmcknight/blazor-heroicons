@@ -15,8 +15,8 @@ public class HeroiconTests : BunitTestContext
         var cut = RenderComponent<Heroicon>();
         // Assert
         Assert.AreEqual("h-6 w-6", cut.Find("svg").GetAttribute("class"));
-        Assert.AreEqual("Sparkles", cut.Instance.Name);
-        Assert.AreEqual(HeroiconType.Solid, cut.Instance.Type);
+        Assert.AreEqual("SparklesIcon", cut.Instance.Name);
+        Assert.AreEqual(HeroiconType.Outline, cut.Instance.Type);
     }
 
     [TestMethod]
@@ -49,7 +49,7 @@ public class HeroiconTests : BunitTestContext
         catch (Exception ex)
         {
             //Assert
-            Assert.AreEqual("Heroicon 'Solid.MythicalIcon' not found", ex.Message);
+            Assert.AreEqual("Heroicon 'Outline.MythicalIcon' not found", ex.Message);
         }
     }
 

@@ -31,7 +31,7 @@
         _heroiconType != Type)
         {
             //find icon based on name and type
-            _razorComponentType = System.Type.GetType($"Blazor.Heroicons.{Type}.{name}", true, true)!;
+            _razorComponentType = System.Type.GetType($"Blazor.Heroicons.{Type}.{name}", false, true)!;
             _heroiconType = Type;
         }
 
