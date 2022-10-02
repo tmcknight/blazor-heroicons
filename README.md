@@ -12,7 +12,7 @@ dotnet add package Blazor.Heroicons
 
 Now each icon can be used as a Blazor component:
 
-```html
+```razor
 @using Blazor.Heroicons.Solid
 
 <SparklesIcon class="h-6 w-6 text-blue-500" />
@@ -21,7 +21,7 @@ Now each icon can be used as a Blazor component:
 
 You can also reference an icon by name, using the `Heroicon` component:
 
-```html
+```razor
 @using Blazor.Heroicons
 
 <Heroicon
