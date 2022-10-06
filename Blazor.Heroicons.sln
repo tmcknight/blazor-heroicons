@@ -25,11 +25,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{C749
 		scripts\get-latest-heroicons.py = scripts\get-latest-heroicons.py
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{87561495-4780-401D-A705-09482B378BE4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{3B582B10-25F2-44C6-867E-7EDC706ADEBC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C6D64979-5419-4023-B027-13D55345E690}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C33294FD-764A-44A6-B8C9-6F000E014F1A}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		.github\workflows\heroicons.yml = .github\workflows\heroicons.yml
+		.github\workflows\publish.yml = .github\workflows\publish.yml
 	EndProjectSection
 EndProject
 Global
@@ -58,8 +60,7 @@ Global
 		{387C4A8A-3869-4EAF-BDD3-9D44F345A977} = {37817D12-C860-4FB5-AFB9-4CE60FC6F697}
 		{786E4310-B9E9-48C2-A6A1-53C91FC81E57} = {37817D12-C860-4FB5-AFB9-4CE60FC6F697}
 		{08894048-7D6A-43FC-A3D0-E28AC950BEF3} = {3E41A27C-AD1B-48D3-9FA2-6D4715A51D61}
-		{87561495-4780-401D-A705-09482B378BE4} = {0B5BB6E7-0A47-4C70-A204-EFFD16C8760C}
-		{C6D64979-5419-4023-B027-13D55345E690} = {87561495-4780-401D-A705-09482B378BE4}
+		{C33294FD-764A-44A6-B8C9-6F000E014F1A} = {3B582B10-25F2-44C6-867E-7EDC706ADEBC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B74841EF-3D87-414A-9DBC-99C25771CC5D}
