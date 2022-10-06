@@ -13,9 +13,9 @@ jobs:
 
       - name: Get current heroicons version
         run: |
-          echo "current_version= \
-            $(curl -Lfs https://raw.githubusercontent.com/tmcknight/Blazor.Heroicons/${{ env.branch_name }}/.heroicons-version \
-            || echo $(<.heroicons-version))" >> $GITHUB_ENV
+          echo "current_version=\
+          $(curl -Lfs https://raw.githubusercontent.com/tmcknight/Blazor.Heroicons/${{ env.branch_name }}/.heroicons-version\
+          || echo $(<.heroicons-version))" >> $GITHUB_ENV
 
       - name: Get latest github release
         id: latest_release
