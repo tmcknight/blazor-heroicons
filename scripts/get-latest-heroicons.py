@@ -10,7 +10,7 @@ import tarfile
 
 def main():
     # move to project root
-    os.chdir("..")
+    os.chdir(f"{os.path.dirname(__file__)}/..")
 
     # clean up prior run, if required
     if Path("tmp").exists():
