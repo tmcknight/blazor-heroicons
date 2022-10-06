@@ -13,13 +13,8 @@ jobs:
 
       - name: Get current heroicons version
         run: |
-          pr_version=$(curl -Lfs https://raw.githubusercontent.com/tmcknight/Blazor.Heroicons/${{ env.branch_name }}/.heroicons-version) || true
-          if [ -z "$pr_version"]
-          then
-            echo "current_version=$pr_version" >> $GITHUB_ENV
-          else
-            echo "current_version=$(<.heroicons-version)" >> $GITHUB_ENV
-          fi
+          current_version=$(curl -Lfs https://raw.githubusercontent.com/tmcknight/Blazor.Heroicons/${{ env.branch_name }}/.heroicons-version) || $(<.heroicons-version)
+          echo "current_version=$current_version" >> $GITHUB_ENV
 
       - name: Get latest github release
         id: latest_release
