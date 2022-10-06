@@ -1,0 +1,32 @@
+name: Update heroicons
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get current heroicons version
+        run: echo "current_version=$(<.heroicons-version)" >> $GITHUB_ENV
+      - name: Get latest github release
+        id: latest_release
+        uses: oprypin/find-latest-tag@v1
+        with:
+          repository: tailwindlabs/heroicons
+          releases-only: true
+      - name: Setup python
+        if: ${{ steps.latest_release.outputs.tag != env.current_version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Get latest release
+        if: ${{ steps.latest_release.outputs.tag != env.current_version }}
+        run: python src/get-latest-heroicons.py
+      - name: Create pull request
+        if: ${{ steps.latest_release.outputs.tag != env.current_version }}
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: ${{ steps.latest_release.outputs.tag }}
+          title: Update heroicons to ${{ steps.latest_release.outputs.tag }}

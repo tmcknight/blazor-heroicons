@@ -97,7 +97,7 @@ def to_pascal_case(text):
 
 
 def update_readme_heroicons_version(version_tag):
-    print("Updating heroicons version badge...")
+    print("Updating heroicons version in README...")
     version_badge = ("[![Heroicons version]"
                      f"(https://img.shields.io/badge/heroicons-{version_tag}-informational?style=flat-square)]"
                      f"(https://github.com/tailwindlabs/heroicons/releases/tag/{version_tag})"
@@ -112,6 +112,8 @@ def update_readme_heroicons_version(version_tag):
 
     with open("README.md", "w") as readme_file:
         readme_file.writelines(lines)
+    with open(".heroicons-version", "w") as version_file:
+        version_file.write(version_tag)
 
 
 if __name__ == "__main__":
