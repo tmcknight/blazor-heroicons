@@ -37,6 +37,12 @@ You can also reference an icon by name, using the `Heroicon` component:
 
 [Browse the full list of icons on Heroicons &rarr;](https://heroicons.com)
 
+## Links
+
+- [Release notes](https://github.com/tmcknight/Blazor.Heroicons/releases)
+- [NuGet package](https://www.nuget.org/packages/Blazor.Heroicons)
+- [License](https://github.com/tmcknight/Blazor.Heroicons/blob/main/LICENSE)
+
 ## License
 
 This library is MIT licensed.
