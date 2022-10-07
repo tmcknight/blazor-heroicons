@@ -1,0 +1,28 @@
+@inherits HeroiconBase
+
+<DynamicComponent Type="_razorComponentType" Parameters="AdditionalAttributes"></DynamicComponent>
+
+@code {
+    [Parameter]
+    public HeroiconType Type { get; set; } = HeroiconType.Outline;
+    private HeroiconType _heroiconType;
+    private Type _razorComponentType = typeof(Solid.SparklesIcon);
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        //check to see if the icon parameters have changed
+        if (_razorComponentType is null || _heroiconType != Type)
+        {
+            _heroiconType = Type;
+
+            //get random icon
+            var componentTypes = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(t => t.GetTypes())
+            .Where(t => t.IsClass && t.Namespace == $"Blazor.Heroicons.{Type}");
+            _razorComponentType = componentTypes.ElementAt(Random.Shared.Next());
+        }
+    }
+
+}
