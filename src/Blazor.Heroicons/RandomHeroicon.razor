@@ -6,7 +6,7 @@
 @code {
     [Parameter]
     public HeroiconType Type { get; set; } = HeroiconType.Outline;
-    private HeroiconType _heroiconType;
+    private HeroiconType _heroiconType = HeroiconType.Outline;
     public Type _razorComponentType = null!;
 
     protected override void OnParametersSet()
@@ -19,10 +19,15 @@
             _heroiconType = Type;
 
             //get random icon
-            var componentTypes = Assembly.GetExecutingAssembly().GetTypes()
-            .Where(t => t.IsClass && t.Namespace == $"Blazor.Heroicons.{Type}");
-            _razorComponentType = componentTypes.ElementAt(Random.Shared.Next(0, componentTypes.Count()));
+            _razorComponentType = GetRandomIcon(Type);
         }
+    }
+
+    private Type GetRandomIcon(HeroiconType type)
+    {
+        var componentTypes = Assembly.GetExecutingAssembly().GetTypes()
+        .Where(t => t.IsClass && t.Namespace == $"Blazor.Heroicons.{type}");
+        return componentTypes.ElementAt(Random.Shared.Next(0, componentTypes.Count()));
     }
 
 }
