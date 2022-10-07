@@ -19,23 +19,35 @@ Now each icon can be used as a Blazor component:
 ```razor
 @using Blazor.Heroicons.Solid
 
-<SparklesIcon class="h-6 w-6 text-blue-500" />
-<HandThumbUpIcon class="h-10 w-10 text-green-800" />
+<div>
+  <BeakerIcon className="h-6 w-6 text-blue-500" />
+  <p>...</p>
+</div>
 ```
+
+The icons are preconfigured to be stylable by setting the `color` CSS property, either manually or using utility classes like `text-gray-500` in a framework like [Tailwind CSS](https://tailwindcss.com/).
+
+### `<Heroicon />`
 
 You can also reference an icon by name, using the `Heroicon` component:
 
 ```razor
 @using Blazor.Heroicons
 
-<Heroicon
-  Name="sparkles"
-  Type="Heroicon.IconType.Outline"
-  class="h-10 w-10 text-yellow-600"
-/>
+<Heroicon Name="sparkles" Type="Heroicon.IconType.Outline" class="h-6 w-6 text-yellow-600" />
 ```
 
 [Browse the full list of icons on Heroicons &rarr;](https://heroicons.com)
+
+### `<RandomHeroicon />`
+
+If you want to get crazy, use the `RandomHeroicon` component to render a random icon:
+
+```razor
+@using Blazor.Heroicons
+
+<RandomHeroicon Type="Heroicon.IconType.Mini" class="h-6 w-6 text-green-700" />
+```
 
 ## Links
 

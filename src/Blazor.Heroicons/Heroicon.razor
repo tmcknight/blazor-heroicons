@@ -1,6 +1,6 @@
 @inherits HeroiconBase
 
-<DynamicComponent Type="_razorComponentType" Parameters="_attributes"></DynamicComponent>
+<DynamicComponent Type="_razorComponentType" Parameters="AdditionalAttributes"></DynamicComponent>
 
 @code {
     [Parameter]
@@ -9,10 +9,6 @@
     public HeroiconType Type { get; set; } = HeroiconType.Outline;
     private HeroiconType _heroiconType;
     private Type _razorComponentType = typeof(Solid.SparklesIcon);
-    private Dictionary<string, object> _attributes => new()
-    {
-        { "AdditionalAttributes", AdditionalAttributes }
-    };
 
     protected override void OnParametersSet()
     {
