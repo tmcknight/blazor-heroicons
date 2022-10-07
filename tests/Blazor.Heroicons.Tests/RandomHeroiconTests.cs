@@ -10,7 +10,7 @@ public class RandomHeroiconTests : BunitTestContext
         //Act
         var cut = RenderComponent<RandomHeroicon>();
         // Assert
-        Assert.AreEqual("h-6 w-6", cut.Find("svg").GetAttribute("class"));
+        Assert.IsFalse(cut.Find("svg").HasAttribute("class"));
         Assert.AreEqual(HeroiconType.Outline, cut.Instance.Type);
     }
 
@@ -21,7 +21,6 @@ public class RandomHeroiconTests : BunitTestContext
         var cut = RenderComponent<RandomHeroicon>();
         var originalType = cut.Instance.Type;
         // Assert
-        Assert.AreEqual("h-6 w-6", cut.Find("svg").GetAttribute("class"));
         Assert.AreEqual(HeroiconType.Outline, cut.Instance.Type);
         //Act
         cut.SetParametersAndRender(parameters => parameters

@@ -12,7 +12,7 @@ public class HeroiconTests : BunitTestContext
         //Act
         var cut = RenderComponent<Heroicon>();
         // Assert
-        Assert.AreEqual("h-6 w-6", cut.Find("svg").GetAttribute("class"));
+        Assert.IsFalse(cut.Find("svg").HasAttribute("class"));
         Assert.AreEqual("SparklesIcon", cut.Instance.Name);
         Assert.AreEqual(HeroiconType.Outline, cut.Instance.Type);
     }
