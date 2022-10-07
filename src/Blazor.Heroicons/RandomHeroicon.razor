@@ -1,3 +1,4 @@
+@using System.Reflection
 @inherits HeroiconBase
 
 <DynamicComponent Type="_razorComponentType" Parameters="AdditionalAttributes"></DynamicComponent>
@@ -6,7 +7,7 @@
     [Parameter]
     public HeroiconType Type { get; set; } = HeroiconType.Outline;
     private HeroiconType _heroiconType;
-    private Type _razorComponentType = typeof(Solid.SparklesIcon);
+    public Type _razorComponentType = null!;
 
     protected override void OnParametersSet()
     {
@@ -18,10 +19,9 @@
             _heroiconType = Type;
 
             //get random icon
-            var componentTypes = AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(t => t.GetTypes())
+            var componentTypes = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => t.IsClass && t.Namespace == $"Blazor.Heroicons.{Type}");
-            _razorComponentType = componentTypes.ElementAt(Random.Shared.Next());
+            _razorComponentType = componentTypes.ElementAt(Random.Shared.Next(0, componentTypes.Count()));
         }
     }
 

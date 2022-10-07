@@ -1,6 +1,4 @@
 namespace Blazor.Heroicons.Tests;
-using Bunit;
-using Blazor.Heroicons;
 using System.Reflection;
 using Microsoft.AspNetCore.Components;
 
@@ -23,13 +21,9 @@ public class HeroiconTests : BunitTestContext
     public void RendersWithAdditionalAttribute()
     {
         // Arrange
-        var additionalAttributes = new Dictionary<string, object>() {
-            {"added-attribute", "wahoo"}
-        };
-
         // Act
         var cut = RenderComponent<Heroicon>(parameters => parameters
-            .Add(p => p.AdditionalAttributes, additionalAttributes));
+            .AddUnmatched("added-attribute", "wahoo"));
 
         // Assert
         Assert.AreEqual("wahoo", cut.Find("svg").GetAttribute("added-attribute"));
@@ -88,5 +82,53 @@ public class HeroiconTests : BunitTestContext
             //Assert
             cut.MarkupMatches("<svg diff:ignore></svg>");
         }
+    }
+
+    [TestMethod]
+    public void HeroiconRendersNameChange()
+    {
+        // Arrange 
+        //Act
+        var cut = RenderComponent<Heroicon>();
+        // Assert
+        Assert.AreEqual("SparklesIcon", cut.Instance.Name);
+        var sparkles = cut.Markup;
+        cut.SetParametersAndRender(parameters => parameters
+            .Add(p => p.Name, "HandThumbUpIcon"));
+        Assert.AreEqual("HandThumbUpIcon", cut.Instance.Name);
+        Assert.AreNotEqual(sparkles, cut.Markup);
+    }
+
+    [TestMethod]
+    public void HeroiconRendersTypeChange()
+    {
+        // Arrange 
+        //Act
+        var cut = RenderComponent<Heroicon>();
+        // Assert
+        Assert.AreEqual(HeroiconType.Outline, cut.Instance.Type);
+        var sparkles = cut.Markup;
+        cut.SetParametersAndRender(parameters => parameters
+            .Add(p => p.Type, HeroiconType.Solid));
+        Assert.AreEqual(HeroiconType.Solid, cut.Instance.Type);
+        Assert.AreNotEqual(sparkles, cut.Markup);
+    }
+
+    [TestMethod]
+    public void ChangingUnmatchedAttributeRetainsIcon()
+    {
+        // Arrange 
+        var cut = RenderComponent<Heroicon>(parameters => parameters
+            .Add(p => p.Name, "HandThumbUpIcon")
+            .Add(p => p.Type, HeroiconType.Solid));
+
+        //Act
+        cut.SetParametersAndRender(parameters => parameters
+            .AddUnmatched("class", "h-10 w-10"));
+
+        // Assert
+        Assert.AreEqual("h-10 w-10", cut.Find("svg").GetAttribute("class"));
+        Assert.AreEqual("HandThumbUpIcon", cut.Instance.Name);
+        Assert.AreEqual(HeroiconType.Solid, cut.Instance.Type);
     }
 }
