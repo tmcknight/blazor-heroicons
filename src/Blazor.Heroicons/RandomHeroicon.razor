@@ -4,6 +4,9 @@
 <DynamicComponent Type="_razorComponentType" Parameters="AdditionalAttributes"></DynamicComponent>
 
 @code {
+    /// <summary>
+    /// The type of icon. Default: <see cref="HeroiconType.Outline"/>.
+    /// </summary>
     [Parameter]
     public HeroiconType Type { get; set; } = HeroiconType.Outline;
     private HeroiconType _heroiconType = HeroiconType.Outline;
