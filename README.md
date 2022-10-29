@@ -34,7 +34,7 @@ You can also reference an icon by name, using the `Heroicon` component:
 ```razor
 @using Blazor.Heroicons
 
-<Heroicon Name="sparkles" Type="HeroiconType.Outline" class="h-6 w-6 text-yellow-600" />
+<Heroicon Name="@HeroiconName.Sparkles" Type="HeroiconType.Outline" class="h-6 w-6 text-yellow-600" />
 ```
 
 [Browse the full list of icons on Heroicons &rarr;](https://heroicons.com)
