@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.1.2</Version>
+		<Version>1.2.0</Version>
 		<Authors>Tom McKnight</Authors>
 		<PackageProjectUrl>https://github.com/tmcknight/Blazor.Heroicons</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/tmcknight/Blazor.Heroicons</RepositoryUrl>
@@ -24,8 +24,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="../../.github/icon.png" Pack="true" PackagePath=""/>
-		<None Include="../../README.md" Pack="true" PackagePath=""/>
+		<None Include="../../.github/icon.png" Pack="true" PackagePath="" />
+		<None Include="../../README.md" Pack="true" PackagePath="" />
 	</ItemGroup>
 
 	<ItemGroup>
