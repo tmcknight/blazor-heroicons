@@ -53,7 +53,7 @@ def main():
     create_blazor_component_files("Mini", "tmp/**/20/solid/*.svg")
     create_blazor_component_files("Solid", "tmp/**/24/solid/*.svg")
     create_blazor_component_files("Outline", "tmp/**/24/outline/*.svg")
-    
+
     # Update HeroiconName class
     print("Updating HeroiconName class")
     update_heroicon_name_class("tmp/**/20/solid/*.svg")
@@ -118,7 +118,8 @@ def update_readme_heroicons_version(version_tag):
         readme_file.writelines(lines)
     with open(".heroicons-version", "w") as version_file:
         version_file.write(version_tag)
-        
+
+
 def update_heroicon_name_class(glob):
 
     filename = "src/Blazor.Heroicons/HeroiconName.cs"
@@ -130,21 +131,22 @@ def update_heroicon_name_class(glob):
     content = content + "\n"
     content = content + "public static class HeroiconName\n"
     content = content + "{\n"
-    
+
     # loop through files
     file_list = [f for f in iglob(glob, recursive=True) if os.path.isfile(f)]
+    file_list.sort()
     for filepath in file_list:
         file = os.path.basename(filepath)[:-4]
         fileParts = file.split("-")
         iconName = "".join(map(lambda part: part.title(), fileParts))
-        content = content + f"\tpublic static string {iconName} => \"{file}\";\n"
+        content = content + \
+            f"\tpublic static string {iconName} => \"{file}\";\n"
     content = content + "}\n"
-    
+
     f = open(filename, "w")
     f.write(content)
 
     print(f"Updated HeroiconName.cs")
-    
 
 
 if __name__ == "__main__":
