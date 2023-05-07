@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>1.2.1</Version>
+		<Version>1.2.2</Version>
 		<Authors>Tom McKnight</Authors>
 		<PackageProjectUrl>https://github.com/tmcknight/Blazor.Heroicons</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/tmcknight/Blazor.Heroicons</RepositoryUrl>
