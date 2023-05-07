@@ -20,7 +20,7 @@ Now each icon can be used as a Blazor component:
 @using Blazor.Heroicons.Solid
 
 <div>
-  <BeakerIcon className="h-6 w-6 text-blue-500" />
+  <BeakerIcon class="h-6 w-6 text-blue-500" />
   <p>...</p>
 </div>
 ```
