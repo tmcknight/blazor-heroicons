@@ -1,35 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-
-	<PropertyGroup>
-		<PackageId>Blazor.Heroicons</PackageId>
-		<TargetFramework>net6.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>2.0.0</Version>
-		<Authors>Tom McKnight</Authors>
-		<PackageProjectUrl>https://github.com/tmcknight/Blazor.Heroicons</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/tmcknight/Blazor.Heroicons</RepositoryUrl>
-		<PackageDescription>A third-party Blazor component library for Heroicons.</PackageDescription>
-		<Description>A third-party Blazor component library for Heroicons.</Description>
-		<RepositoryType>git</RepositoryType>
-		<PackageTags>Heroicons;Icons;Tailwind;TailwindCSS;Blazor</PackageTags>
-		<PackageIcon>icon.png</PackageIcon>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-	</PropertyGroup>
-
-
-	<ItemGroup>
-		<SupportedPlatform Include="browser" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="../../.github/icon.png" Pack="true" PackagePath="" />
-		<None Include="../../README.md" Pack="true" PackagePath="" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
-	</ItemGroup>
-
+  <PropertyGroup>
+    <PackageId>Blazor.Heroicons</PackageId>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>2.0.0</Version>
+    <Authors>Tom McKnight</Authors>
+    <PackageProjectUrl>https://github.com/tmcknight/Blazor.Heroicons</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tmcknight/Blazor.Heroicons</RepositoryUrl>
+    <PackageDescription>A third-party Blazor component library for Heroicons.</PackageDescription>
+    <Description>A third-party Blazor component library for Heroicons.</Description>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Heroicons;Icons;Tailwind;TailwindCSS;Blazor</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../../.github/icon.png" Pack="true" PackagePath="" />
+    <None Include="../../README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+  </ItemGroup>
 </Project>
