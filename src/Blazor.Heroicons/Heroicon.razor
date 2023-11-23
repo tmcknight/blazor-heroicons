@@ -37,8 +37,8 @@
             _heroiconType = Type;
         }
 
-        if (_razorComponentType is null)
-            throw new Exception($"Heroicon '{Type}.{name}' not found");
+        //if icon is not found, use question mark circle icon
+        _razorComponentType ??= typeof(Outline.QuestionMarkCircleIcon);
     }
 
 }
