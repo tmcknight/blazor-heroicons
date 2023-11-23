@@ -1,4 +1,4 @@
-using DemoWebApp.Components;
+using Blazor.Heroicons.DemoWebApp.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +27,6 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(DemoWebApp.Client._Imports).Assembly);
+    .AddAdditionalAssemblies(typeof(Blazor.Heroicons.DemoWebApp.Client._Imports).Assembly);
 
 app.Run();
