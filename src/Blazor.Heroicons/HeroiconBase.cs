@@ -8,7 +8,7 @@ public abstract class HeroiconBase : ComponentBase
     /// Gets or sets a collection of additional attributes that will be applied to the created element.
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object> AdditionalAttributes { get; set; } = [];
+    public Dictionary<string, object> AdditionalAttributes { get; set; } = new();
 }
 
 /// <summary>
