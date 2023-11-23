@@ -1,20 +1,26 @@
 @inherits HeroiconBase
-
-<DynamicComponent Type="_razorComponentType" Parameters="AdditionalAttributes"></DynamicComponent>
+@if (_razorComponentType is not null)
+{
+    <DynamicComponent Type="_razorComponentType" Parameters="AdditionalAttributes"></DynamicComponent>
+}
+else
+{
+    <Blazor.Heroicons.Outline.QuestionMarkCircleIcon @attributes="AdditionalAttributes" />
+}
 
 @code {
     /// <summary>
-    /// The name of the icon. Default: "SparklesIcon".
+    /// The name of the icon. Default: <see cref="HeroiconName.Sparkles"/>.
     /// </summary>
-    [Parameter]
-    public string Name { get; set; } = "SparklesIcon";
+    [Parameter] public string Name { get; set; } = HeroiconName.Sparkles;
+
     /// <summary>
     /// The type of icon. Default: <see cref="HeroiconType.Outline"/>.
     /// </summary>
-    [Parameter]
-    public HeroiconType Type { get; set; } = HeroiconType.Outline;
+    [Parameter] public HeroiconType Type { get; set; } = HeroiconType.Outline;
+
     private HeroiconType _heroiconType;
-    private Type _razorComponentType = typeof(Solid.SparklesIcon);
+    private Type? _razorComponentType;
 
     protected override void OnParametersSet()
     {
@@ -36,9 +42,6 @@
             _razorComponentType = System.Type.GetType($"Blazor.Heroicons.{Type}.{name}", false, true)!;
             _heroiconType = Type;
         }
-
-        //if icon is not found, use question mark circle icon
-        _razorComponentType ??= typeof(Outline.QuestionMarkCircleIcon);
     }
 
 }
