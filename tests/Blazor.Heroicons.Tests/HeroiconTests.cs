@@ -1,7 +1,8 @@
-namespace Blazor.Heroicons.Tests;
-using System.Reflection;
+using Blazor.Heroicons.Outline;
 using Microsoft.AspNetCore.Components;
+using System.Reflection;
 
+namespace Blazor.Heroicons.Tests;
 [TestClass]
 public class HeroiconTests : BunitTestContext
 {
@@ -12,9 +13,11 @@ public class HeroiconTests : BunitTestContext
         //Act
         var cut = RenderComponent<Heroicon>();
         // Assert
+        var sparklesIcon = RenderComponent<SparklesIcon>();
         Assert.IsFalse(cut.Find("svg").HasAttribute("class"));
-        Assert.AreEqual("SparklesIcon", cut.Instance.Name);
+        Assert.AreEqual(HeroiconName.Sparkles, cut.Instance.Name);
         Assert.AreEqual(HeroiconType.Outline, cut.Instance.Type);
+        Assert.AreEqual(sparklesIcon.Markup, cut.Markup);
     }
 
     [TestMethod]
@@ -30,21 +33,16 @@ public class HeroiconTests : BunitTestContext
     }
 
     [TestMethod]
-    public void UnknownNameThrowsException()
+    public void UnknownNameRendersQuestionMark()
     {
         // Arrange
+        var iconName = "MythicalIcon";
         // Act
-        try
-        {
-            var cut = RenderComponent<Heroicon>(parameters => parameters
-                .Add(p => p.Name, "MythicalIcon"));
-            Assert.Fail("An exception should have been thrown.");
-        }
-        catch (Exception ex)
-        {
-            //Assert
-            Assert.AreEqual("Heroicon 'Outline.MythicalIcon' not found", ex.Message);
-        }
+        var cut = RenderComponent<Heroicon>(parameters => parameters
+            .Add(p => p.Name, iconName));
+        var questionMark = RenderComponent<QuestionMarkCircleIcon>();
+        //Assert
+        Assert.AreEqual(questionMark.Markup, cut.Markup);
     }
 
     [TestMethod]
@@ -91,7 +89,7 @@ public class HeroiconTests : BunitTestContext
         //Act
         var cut = RenderComponent<Heroicon>();
         // Assert
-        Assert.AreEqual("SparklesIcon", cut.Instance.Name);
+        Assert.AreEqual(HeroiconName.Sparkles, cut.Instance.Name);
         var sparkles = cut.Markup;
         cut.SetParametersAndRender(parameters => parameters
             .Add(p => p.Name, "HandThumbUpIcon"));
