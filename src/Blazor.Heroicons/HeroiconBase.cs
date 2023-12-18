@@ -27,5 +27,9 @@ public enum HeroiconType
     /// <summary>
     /// For smaller elements like buttons, form elements, and to support text.
     /// </summary>
-    Mini
+    Mini,
+    /// <summary>
+    /// For tighter, higher density UIs.
+    /// </summary>
+    Micro
 }
