@@ -50,6 +50,7 @@ def main():
 
     # loop through files
     print("Looping through svg files and creating razor components...")
+    create_blazor_component_files("Micro", "tmp/**/16/solid/*.svg")
     create_blazor_component_files("Mini", "tmp/**/20/solid/*.svg")
     create_blazor_component_files("Solid", "tmp/**/24/solid/*.svg")
     create_blazor_component_files("Outline", "tmp/**/24/outline/*.svg")
@@ -79,8 +80,8 @@ def create_blazor_component_files(icon_type, glob):
         with open(file) as svg:
             content = "@inherits HeroiconBase\n"
             content = content + svg.read()
-            content = content.replace("aria-hidden=\"true\">",
-                                      "aria-hidden=\"true\" @attributes=\"AdditionalAttributes\">")
+            content = content.replace("aria-hidden=\"true\"",
+                                      "aria-hidden=\"true\" @attributes=\"AdditionalAttributes\"")
 
         # write file
         with open(f"{componentDir}/{to_pascal_case(Path(file).stem)}Icon.razor", 'w') as blazor_component:

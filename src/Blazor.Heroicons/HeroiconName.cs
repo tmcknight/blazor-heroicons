@@ -16,7 +16,9 @@ public static class HeroiconName
 	public static string ArrowDownTray => "arrow-down-tray";
 	public static string ArrowDown => "arrow-down";
 	public static string ArrowLeftCircle => "arrow-left-circle";
+	public static string ArrowLeftEndOnRectangle => "arrow-left-end-on-rectangle";
 	public static string ArrowLeftOnRectangle => "arrow-left-on-rectangle";
+	public static string ArrowLeftStartOnRectangle => "arrow-left-start-on-rectangle";
 	public static string ArrowLeft => "arrow-left";
 	public static string ArrowLongDown => "arrow-long-down";
 	public static string ArrowLongLeft => "arrow-long-left";
@@ -25,7 +27,9 @@ public static class HeroiconName
 	public static string ArrowPathRoundedSquare => "arrow-path-rounded-square";
 	public static string ArrowPath => "arrow-path";
 	public static string ArrowRightCircle => "arrow-right-circle";
+	public static string ArrowRightEndOnRectangle => "arrow-right-end-on-rectangle";
 	public static string ArrowRightOnRectangle => "arrow-right-on-rectangle";
+	public static string ArrowRightStartOnRectangle => "arrow-right-start-on-rectangle";
 	public static string ArrowRight => "arrow-right";
 	public static string ArrowSmallDown => "arrow-small-down";
 	public static string ArrowSmallLeft => "arrow-small-left";
