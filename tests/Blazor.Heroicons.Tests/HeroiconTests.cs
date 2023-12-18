@@ -64,6 +64,7 @@ public class HeroiconTests : BunitTestContext
     [DataRow(HeroiconType.Solid)]
     [DataRow(HeroiconType.Outline)]
     [DataRow(HeroiconType.Mini)]
+    [DataRow(HeroiconType.Micro)]
     public void AllIconsRenderCorrectly(HeroiconType heroiconType)
     {
         // Arrange
