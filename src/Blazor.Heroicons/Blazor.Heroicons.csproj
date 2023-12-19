@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 	<PropertyGroup>
 		<PackageId>Blazor.Heroicons</PackageId>
 		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>2.1.1</Version>
+		<Version>2.1.2</Version>
 		<Authors>Tom McKnight</Authors>
 		<PackageProjectUrl>https://github.com/tmcknight/Blazor.Heroicons</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/tmcknight/Blazor.Heroicons</RepositoryUrl>
