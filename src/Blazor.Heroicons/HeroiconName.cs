@@ -38,6 +38,14 @@ public static class HeroiconName
 	public static string ArrowTopRightOnSquare => "arrow-top-right-on-square";
 	public static string ArrowTrendingDown => "arrow-trending-down";
 	public static string ArrowTrendingUp => "arrow-trending-up";
+	public static string ArrowTurnDownLeft => "arrow-turn-down-left";
+	public static string ArrowTurnDownRight => "arrow-turn-down-right";
+	public static string ArrowTurnLeftDown => "arrow-turn-left-down";
+	public static string ArrowTurnLeftUp => "arrow-turn-left-up";
+	public static string ArrowTurnRightDown => "arrow-turn-right-down";
+	public static string ArrowTurnRightUp => "arrow-turn-right-up";
+	public static string ArrowTurnUpLeft => "arrow-turn-up-left";
+	public static string ArrowTurnUpRight => "arrow-turn-up-right";
 	public static string ArrowUpCircle => "arrow-up-circle";
 	public static string ArrowUpLeft => "arrow-up-left";
 	public static string ArrowUpOnSquareStack => "arrow-up-on-square-stack";
@@ -73,6 +81,7 @@ public static class HeroiconName
 	public static string BellSlash => "bell-slash";
 	public static string BellSnooze => "bell-snooze";
 	public static string Bell => "bell";
+	public static string Bold => "bold";
 	public static string BoltSlash => "bolt-slash";
 	public static string Bolt => "bolt";
 	public static string BookOpen => "book-open";
@@ -87,6 +96,7 @@ public static class HeroiconName
 	public static string BuildingStorefront => "building-storefront";
 	public static string Cake => "cake";
 	public static string Calculator => "calculator";
+	public static string CalendarDateRange => "calendar-date-range";
 	public static string CalendarDays => "calendar-days";
 	public static string Calendar => "calendar";
 	public static string Camera => "camera";
@@ -142,10 +152,17 @@ public static class HeroiconName
 	public static string CursorArrowRipple => "cursor-arrow-ripple";
 	public static string DevicePhoneMobile => "device-phone-mobile";
 	public static string DeviceTablet => "device-tablet";
+	public static string Divide => "divide";
 	public static string DocumentArrowDown => "document-arrow-down";
 	public static string DocumentArrowUp => "document-arrow-up";
 	public static string DocumentChartBar => "document-chart-bar";
 	public static string DocumentCheck => "document-check";
+	public static string DocumentCurrencyBangladeshi => "document-currency-bangladeshi";
+	public static string DocumentCurrencyDollar => "document-currency-dollar";
+	public static string DocumentCurrencyEuro => "document-currency-euro";
+	public static string DocumentCurrencyPound => "document-currency-pound";
+	public static string DocumentCurrencyRupee => "document-currency-rupee";
+	public static string DocumentCurrencyYen => "document-currency-yen";
 	public static string DocumentDuplicate => "document-duplicate";
 	public static string DocumentMagnifyingGlass => "document-magnifying-glass";
 	public static string DocumentMinus => "document-minus";
@@ -157,6 +174,7 @@ public static class HeroiconName
 	public static string EllipsisVertical => "ellipsis-vertical";
 	public static string EnvelopeOpen => "envelope-open";
 	public static string Envelope => "envelope";
+	public static string Equals => "equals";
 	public static string ExclamationCircle => "exclamation-circle";
 	public static string ExclamationTriangle => "exclamation-triangle";
 	public static string EyeDropper => "eye-dropper";
@@ -182,6 +200,9 @@ public static class HeroiconName
 	public static string GlobeAmericas => "globe-americas";
 	public static string GlobeAsiaAustralia => "globe-asia-australia";
 	public static string GlobeEuropeAfrica => "globe-europe-africa";
+	public static string H1 => "h1";
+	public static string H2 => "h2";
+	public static string H3 => "h3";
 	public static string HandRaised => "hand-raised";
 	public static string HandThumbDown => "hand-thumb-down";
 	public static string HandThumbUp => "hand-thumb-up";
@@ -194,10 +215,12 @@ public static class HeroiconName
 	public static string InboxStack => "inbox-stack";
 	public static string Inbox => "inbox";
 	public static string InformationCircle => "information-circle";
+	public static string Italic => "italic";
 	public static string Key => "key";
 	public static string Language => "language";
 	public static string Lifebuoy => "lifebuoy";
 	public static string LightBulb => "light-bulb";
+	public static string LinkSlash => "link-slash";
 	public static string Link => "link";
 	public static string ListBullet => "list-bullet";
 	public static string LockClosed => "lock-closed";
@@ -217,6 +240,7 @@ public static class HeroiconName
 	public static string MusicalNote => "musical-note";
 	public static string Newspaper => "newspaper";
 	public static string NoSymbol => "no-symbol";
+	public static string NumberedList => "numbered-list";
 	public static string PaintBrush => "paint-brush";
 	public static string PaperAirplane => "paper-airplane";
 	public static string PaperClip => "paper-clip";
@@ -224,6 +248,7 @@ public static class HeroiconName
 	public static string Pause => "pause";
 	public static string PencilSquare => "pencil-square";
 	public static string Pencil => "pencil";
+	public static string PercentBadge => "percent-badge";
 	public static string PhoneArrowDownLeft => "phone-arrow-down-left";
 	public static string PhoneArrowUpRight => "phone-arrow-up-right";
 	public static string PhoneXMark => "phone-x-mark";
@@ -261,6 +286,7 @@ public static class HeroiconName
 	public static string ShoppingCart => "shopping-cart";
 	public static string SignalSlash => "signal-slash";
 	public static string Signal => "signal";
+	public static string Slash => "slash";
 	public static string Sparkles => "sparkles";
 	public static string SpeakerWave => "speaker-wave";
 	public static string SpeakerXMark => "speaker-x-mark";
@@ -271,6 +297,7 @@ public static class HeroiconName
 	public static string Star => "star";
 	public static string StopCircle => "stop-circle";
 	public static string Stop => "stop";
+	public static string Strikethrough => "strikethrough";
 	public static string Sun => "sun";
 	public static string Swatch => "swatch";
 	public static string TableCells => "table-cells";
@@ -280,6 +307,7 @@ public static class HeroiconName
 	public static string Trophy => "trophy";
 	public static string Truck => "truck";
 	public static string Tv => "tv";
+	public static string Underline => "underline";
 	public static string UserCircle => "user-circle";
 	public static string UserGroup => "user-group";
 	public static string UserMinus => "user-minus";
