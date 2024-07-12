@@ -7,8 +7,8 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Version>2.1.5</Version>
 		<Authors>Tom McKnight</Authors>
-		<PackageProjectUrl>https://github.com/tmcknight/Blazor.Heroicons</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/tmcknight/Blazor.Heroicons</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/tmcknight/blazor-heroicons</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/tmcknight/blazor-heroicons</RepositoryUrl>
 		<PackageDescription>A third-party Blazor component library for Heroicons.</PackageDescription>
 		<Description>A third-party Blazor component library for Heroicons.</Description>
 		<RepositoryType>git</RepositoryType>
