@@ -174,7 +174,7 @@ public static class HeroiconName
 	public static string EllipsisVertical => "ellipsis-vertical";
 	public static string EnvelopeOpen => "envelope-open";
 	public static string Envelope => "envelope";
-	public static string Equals => "equals";
+	public new static string Equals => "equals";
 	public static string ExclamationCircle => "exclamation-circle";
 	public static string ExclamationTriangle => "exclamation-triangle";
 	public static string EyeDropper => "eye-dropper";
