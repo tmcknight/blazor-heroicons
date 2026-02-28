@@ -3,7 +3,7 @@ import os
 import urllib.request
 import json
 from pathlib import Path
-import cgi
+from email.message import Message
 import shutil
 import tarfile
 
@@ -19,17 +19,24 @@ def main():
 
     # get latest release info
     print("Getting latest release info...")
-    with urllib.request.urlopen("https://api.github.com/repos/tailwindlabs/heroicons/releases/latest") as url:
-        data = json.load(url)
-        version = data["tag_name"]
-        download_url = data["tarball_url"]
+    try:
+        with urllib.request.urlopen("https://api.github.com/repos/tailwindlabs/heroicons/releases/latest") as url:
+            data = json.load(url)
+            version = data["tag_name"]
+            download_url = data["tarball_url"]
+    except urllib.error.URLError as e:
+        print(f"Error: Failed to fetch release info from GitHub: {e}")
+        return
+    except (json.JSONDecodeError, KeyError) as e:
+        print(f"Error: Unexpected response from GitHub API: {e}")
+        return
 
     # download tarball
     print(f"Downloading {version}...")
     with urllib.request.urlopen(download_url) as remote_file:
-        value, params = cgi.parse_header(
-            remote_file.info()['Content-Disposition'])
-        tar_filename = params["filename"]
+        msg = Message()
+        msg['Content-Disposition'] = remote_file.info()['Content-Disposition']
+        tar_filename = msg.get_param('filename', header='Content-Disposition')
 
     # update heroicons version link in readme
     update_readme_heroicons_version(version)
@@ -144,8 +151,8 @@ def update_heroicon_name_class(glob):
             f"\tpublic static string {iconName} => \"{file}\";\n"
     content = content + "}\n"
 
-    f = open(filename, "w")
-    f.write(content)
+    with open(filename, "w") as f:
+        f.write(content)
 
     print(f"Updated HeroiconName.cs")
 

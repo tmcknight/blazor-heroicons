@@ -28,18 +28,18 @@ else
         //remove hyphens and spaces
         var name = Name.Replace("-", "").Replace(" ", "");
         //add icon suffix, if not included
-        if (!name.ToLower().EndsWith("icon"))
+        if (!name.EndsWith("icon", StringComparison.OrdinalIgnoreCase))
         {
             name = $"{name}Icon";
         }
 
         //check to see if the icon parameters have changed
         if (_razorComponentType is null ||
-        _razorComponentType.Name.ToLower() != name.ToLower() ||
+        !_razorComponentType.Name.Equals(name, StringComparison.OrdinalIgnoreCase) ||
         _heroiconType != Type)
         {
             //find icon based on name and type
-            _razorComponentType = System.Type.GetType($"Blazor.Heroicons.{Type}.{name}", false, true)!;
+            _razorComponentType = System.Type.GetType($"Blazor.Heroicons.{Type}.{name}", false, true);
             _heroiconType = Type;
         }
     }
