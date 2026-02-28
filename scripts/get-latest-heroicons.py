@@ -148,7 +148,7 @@ def update_heroicon_name_class(glob):
         fileParts = file.split("-")
         iconName = "".join(map(lambda part: part.title(), fileParts))
         content = content + \
-            f"\tpublic static string {iconName} => \"{file}\";\n"
+            f"\tpublic const string {iconName} = \"{file}\";\n"
     content = content + "}\n"
 
     with open(filename, "w") as f:
