@@ -26,15 +26,15 @@ jobs:
           repository: tailwindlabs/heroicons
           releases-only: true
 
-      - name: Setup python
+      - name: Setup .NET
         if: ${{ steps.latest_release.outputs.tag != env.current_version }}
-        uses: actions/setup-python@v6
+        uses: actions/setup-dotnet@v5
         with:
-          python-version: "3.12"
+          dotnet-version: "10.0.x"
 
       - name: Get latest release
         if: ${{ steps.latest_release.outputs.tag != env.current_version }}
-        run: python scripts/get-latest-heroicons.py
+        run: dotnet run --project src/HeroiconsGenerator
 
       - uses: tibdex/github-app-token@v2
         name: Get Tombot-9000 token
