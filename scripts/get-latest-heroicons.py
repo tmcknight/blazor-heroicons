@@ -51,7 +51,7 @@ def main():
     print("Extracting tar file...")
     tar = tarfile.open(tar_filename)
     tar.extractall(members=optimized_files(
-        tar, os.path.commonprefix(tar.getnames())), path="tmp")
+        tar, os.path.commonprefix(tar.getnames())), path="tmp", filter="data")
     tar.close()
     os.remove(tar_filename)
 
