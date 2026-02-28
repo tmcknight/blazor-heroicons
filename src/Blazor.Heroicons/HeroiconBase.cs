@@ -4,11 +4,11 @@ namespace Blazor.Heroicons;
 
 public abstract class HeroiconBase : ComponentBase
 {
-	/// <summary>
-	/// Gets or sets a collection of additional attributes that will be applied to the created element.
-	/// </summary>
-	[Parameter(CaptureUnmatchedValues = true)]
-	public Dictionary<string, object> AdditionalAttributes { get; set; } = new();
+  /// <summary>
+  /// Gets or sets a collection of additional attributes that will be applied to the created element.
+  /// </summary>
+  [Parameter(CaptureUnmatchedValues = true)]
+  public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; } = new Dictionary<string, object>();
 }
 
 /// <summary>

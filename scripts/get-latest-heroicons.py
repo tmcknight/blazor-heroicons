@@ -3,7 +3,6 @@ import os
 import urllib.request
 import json
 from pathlib import Path
-from email.message import Message
 import shutil
 import tarfile
 
@@ -33,17 +32,13 @@ def main():
 
     # download tarball
     print(f"Downloading {version}...")
-    with urllib.request.urlopen(download_url) as remote_file:
-        msg = Message()
-        msg['Content-Disposition'] = remote_file.info()['Content-Disposition']
-        tar_filename = msg.get_param('filename', header='Content-Disposition')
 
     # update heroicons version link in readme
     update_readme_heroicons_version(version)
 
     # create tmp directory
     Path("tmp").mkdir(exist_ok=True)
-    tar_filename = f"tmp/{tar_filename}"
+    tar_filename = f"tmp/heroicons-{version}.tar.gz"
     urllib.request.urlretrieve(download_url, tar_filename)
     print(f"Downloaded latest release to {tar_filename}")
 
