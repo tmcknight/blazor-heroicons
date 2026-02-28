@@ -1,7 +1,15 @@
 @using System.Reflection
+@using System.Collections.Concurrent
 @inherits HeroiconBase
 
-<DynamicComponent Type="_razorComponentType" Parameters="AdditionalAttributes"></DynamicComponent>
+@if (_razorComponentType is not null)
+{
+    <DynamicComponent Type="_razorComponentType" Parameters="AdditionalAttributes"></DynamicComponent>
+}
+else
+{
+    <Blazor.Heroicons.Outline.QuestionMarkCircleIcon @attributes="AdditionalAttributes" />
+}
 
 @code {
     /// <summary>
@@ -10,7 +18,9 @@
     [Parameter]
     public HeroiconType Type { get; set; } = HeroiconType.Outline;
     private HeroiconType _heroiconType = HeroiconType.Outline;
-    public Type _razorComponentType = null!;
+    private Type? _razorComponentType;
+
+    private static readonly ConcurrentDictionary<HeroiconType, Type[]> _iconTypeCache = new();
 
     protected override void OnParametersSet()
     {
@@ -26,11 +36,17 @@
         }
     }
 
-    private Type GetRandomIcon(HeroiconType type)
+    private static Type? GetRandomIcon(HeroiconType type)
     {
-        var componentTypes = Assembly.GetExecutingAssembly().GetTypes()
-        .Where(t => t.IsClass && t.Namespace == $"Blazor.Heroicons.{type}");
-        return componentTypes.ElementAt(Random.Shared.Next(0, componentTypes.Count()));
+        var componentTypes = _iconTypeCache.GetOrAdd(type, t =>
+            Assembly.GetExecutingAssembly().GetTypes()
+                .Where(ct => ct.IsClass && ct.Namespace == $"Blazor.Heroicons.{t}")
+                .ToArray());
+
+        if (componentTypes.Length == 0)
+            return null;
+
+        return componentTypes[Random.Shared.Next(componentTypes.Length)];
     }
 
 }
