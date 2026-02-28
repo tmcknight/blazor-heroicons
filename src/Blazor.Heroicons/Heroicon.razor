@@ -1,7 +1,7 @@
 @inherits HeroiconBase
 @if (_razorComponentType is not null)
 {
-    <DynamicComponent Type="_razorComponentType" Parameters="@(AdditionalAttributes.ToDictionary(k => k.Key, v => v.Value))"></DynamicComponent>
+    <DynamicComponent Type="_razorComponentType" Parameters="_parameters"></DynamicComponent>
 }
 else
 {
@@ -21,6 +21,8 @@ else
 
     private HeroiconType _heroiconType;
     private Type? _razorComponentType;
+    private IReadOnlyDictionary<string, object>? _lastAttributes;
+    private IDictionary<string, object>? _parameters;
 
     protected override void OnParametersSet()
     {
@@ -42,6 +44,12 @@ else
             var key = $"Blazor.Heroicons.{Type}.{name}";
             _razorComponentType = HeroiconRegistry.Resolve(key);
             _heroiconType = Type;
+        }
+
+        if (_lastAttributes != AdditionalAttributes)
+        {
+            _lastAttributes = AdditionalAttributes;
+            _parameters = AdditionalAttributes.ToDictionary(k => k.Key, v => v.Value);
         }
     }
 
