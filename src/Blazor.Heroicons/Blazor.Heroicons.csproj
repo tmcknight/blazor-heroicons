@@ -15,6 +15,9 @@
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IsTrimmable>true</IsTrimmable>
+		<!-- IL2111: DynamicComponent.Type setter is called via reflection by the Razor source generator.
+		     All icon types are statically referenced via typeof() in HeroiconRegistry, so trimming is safe. -->
+		<NoWarn>$(NoWarn);IL2111</NoWarn>
 	</PropertyGroup>
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
