@@ -131,9 +131,6 @@ def update_readme_heroicons_version(version_tag):
 def update_heroicon_name_class(glob):
 
     filename = "src/Blazor.Heroicons/HeroiconName.cs"
-    backupFilename = filename + ".bak"
-
-    shutil.copyfile(filename, backupFilename)
 
     content = "namespace Blazor.Heroicons;\n"
     content = content + "\n"
