@@ -8,10 +8,10 @@
   A third-party Blazor component library for <a href="https://heroicons.com">Heroicons</a> — beautiful hand-crafted SVG icons by the makers of Tailwind CSS.
 </p>
 
-[![Build and test](https://img.shields.io/github/actions/workflow/status/tmcknight/Blazor.Heroicons/dotnet.yml?branch=main&style=flat-square&logo=github&label=tests)](https://github.com/tmcknight/Blazor.Heroicons/actions/workflows/dotnet.yml)
 [![NuGet package](https://img.shields.io/nuget/v/Blazor.Heroicons?style=flat-square&logo=nuget)](https://www.nuget.org/packages/Blazor.Heroicons)
 [![Heroicons version](https://img.shields.io/badge/heroicons-v2.2.0-informational?style=flat-square)](https://github.com/tailwindlabs/heroicons/releases/tag/v2.2.0)
 [![License](https://img.shields.io/github/license/tmcknight/Blazor.Heroicons?style=flat-square)](LICENSE)
+[![Build and test](https://img.shields.io/github/actions/workflow/status/tmcknight/Blazor.Heroicons/dotnet.yml?branch=main&style=flat-square&logo=github&label=tests)](https://github.com/tmcknight/Blazor.Heroicons/actions/workflows/dotnet.yml)
 
 ## 📦 Installation
 
