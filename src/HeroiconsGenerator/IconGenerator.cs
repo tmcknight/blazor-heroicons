@@ -31,6 +31,4 @@ internal partial class IconGenerator(string rootPath)
         Console.WriteLine($"Created {svgFiles.Length} {iconType} razor components");
     }
 
-    // Keep static helper accessible for tests that reference IconGenerator.ToPascalCase
-    internal static string ToPascalCase(string text) => NamingHelper.ToPascalCase(text);
 }
