@@ -296,4 +296,83 @@ public class IconGeneratorTests
 			Directory.Delete(tmpRoot, true);
 		}
 	}
+
+	[TestMethod]
+	public void CreateBlazorComponents_ThrowsForMissingSvgDirectory()
+	{
+		var tmpRoot = Path.Combine(Path.GetTempPath(), $"heroicons-test-{Guid.NewGuid():N}");
+		Directory.CreateDirectory(tmpRoot);
+
+		try
+		{
+			var generator = new IconGenerator(tmpRoot);
+			Assert.ThrowsExactly<DirectoryNotFoundException>(() =>
+				generator.CreateBlazorComponents("TestType", Path.Combine(tmpRoot, "nonexistent")));
+		}
+		finally
+		{
+			Directory.Delete(tmpRoot, true);
+		}
+	}
+
+	[TestMethod]
+	public void CreateBlazorComponents_EmptySvgDirectory_CreatesEmptyComponentDir()
+	{
+		var tmpRoot = Path.Combine(Path.GetTempPath(), $"heroicons-test-{Guid.NewGuid():N}");
+		var svgDir = Path.Combine(tmpRoot, "svgs");
+		Directory.CreateDirectory(svgDir);
+
+		try
+		{
+			var generator = new IconGenerator(tmpRoot);
+			generator.CreateBlazorComponents("TestType", svgDir);
+
+			var componentDir = Path.Combine(tmpRoot, "src", "Blazor.Heroicons", "TestType");
+			Assert.IsTrue(Directory.Exists(componentDir));
+			Assert.AreEqual(0, Directory.GetFiles(componentDir, "*.razor").Length);
+		}
+		finally
+		{
+			Directory.Delete(tmpRoot, true);
+		}
+	}
+
+	[TestMethod]
+	public void GenerateHeroiconRegistry_EmptyIconSets_ProducesValidFile()
+	{
+		var tmpRoot = Path.Combine(Path.GetTempPath(), $"heroicons-test-{Guid.NewGuid():N}");
+		var heroiconsDir = Path.Combine(tmpRoot, "src", "Blazor.Heroicons");
+		Directory.CreateDirectory(heroiconsDir);
+
+		try
+		{
+			var generator = new RegistryGenerator(tmpRoot);
+			generator.GenerateHeroiconRegistry([]);
+
+			var content = File.ReadAllText(Path.Combine(heroiconsDir, "HeroiconRegistry.cs"));
+			Assert.IsTrue(content.Contains("internal static class HeroiconRegistry"));
+			Assert.IsTrue(content.Contains("Resolve(string key)"));
+		}
+		finally
+		{
+			Directory.Delete(tmpRoot, true);
+		}
+	}
+
+	[TestMethod]
+	public void UpdateReadme_MissingReadmeFile_Throws()
+	{
+		var tmpRoot = Path.Combine(Path.GetTempPath(), $"heroicons-test-{Guid.NewGuid():N}");
+		Directory.CreateDirectory(tmpRoot);
+
+		try
+		{
+			var updater = new ReadmeUpdater(tmpRoot);
+			Assert.ThrowsExactly<FileNotFoundException>(() => updater.UpdateReadme("v1.0.0"));
+		}
+		finally
+		{
+			Directory.Delete(tmpRoot, true);
+		}
+	}
 }
