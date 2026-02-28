@@ -1,6 +1,3 @@
-@using System.Reflection
-@using System.Collections.Concurrent
-@using System.Diagnostics.CodeAnalysis
 @inherits HeroiconBase
 
 @if (_razorComponentType is not null)
@@ -28,8 +25,6 @@ else
     public int? Seed { get; set; }
     private int? _seed;
 
-    private static readonly ConcurrentDictionary<HeroiconType, Type[]> _iconTypeCache = new();
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
@@ -42,13 +37,9 @@ else
         }
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Icon component types are Razor components preserved by the SDK")]
     private static Type? GetRandomIcon(HeroiconType type, int? seed)
     {
-        var componentTypes = _iconTypeCache.GetOrAdd(type, t =>
-            Assembly.GetExecutingAssembly().GetTypes()
-                .Where(ct => ct.IsClass && ct.Namespace == $"Blazor.Heroicons.{t}")
-                .ToArray());
+        var componentTypes = HeroiconRegistry.GetAll(type);
 
         if (componentTypes.Length == 0)
             return null;
