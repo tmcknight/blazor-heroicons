@@ -1,3 +1,4 @@
+@using System.Collections.Concurrent
 @inherits HeroiconBase
 @if (_razorComponentType is not null)
 {
@@ -19,6 +20,8 @@ else
     /// </summary>
     [Parameter] public HeroiconType Type { get; set; } = HeroiconType.Outline;
 
+    private static readonly ConcurrentDictionary<string, Type?> _typeCache = new();
+
     private HeroiconType _heroiconType;
     private Type? _razorComponentType;
 
@@ -39,7 +42,8 @@ else
         _heroiconType != Type)
         {
             //find icon based on name and type
-            _razorComponentType = System.Type.GetType($"Blazor.Heroicons.{Type}.{name}", false, true);
+            var key = $"Blazor.Heroicons.{Type}.{name}";
+            _razorComponentType = _typeCache.GetOrAdd(key, k => System.Type.GetType(k, false, true));
             _heroiconType = Type;
         }
     }
