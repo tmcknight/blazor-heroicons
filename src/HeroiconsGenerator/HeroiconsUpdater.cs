@@ -1,10 +1,6 @@
-using System.Formats.Tar;
-using System.IO.Compression;
-using System.Text.Json;
-
 namespace HeroiconsGenerator;
 
-internal class HeroiconsUpdater(string rootPath)
+internal class HeroiconsUpdater(string rootPath, IReleaseProvider releaseProvider)
 {
     public async Task RunAsync()
     {
@@ -19,32 +15,16 @@ internal class HeroiconsUpdater(string rootPath)
 
         // Get latest release info
         Console.WriteLine("Getting latest release info...");
-        using var http = new HttpClient();
-        http.DefaultRequestHeaders.UserAgent.ParseAdd("HeroiconsGenerator/1.0");
-
-        var json = await http.GetStringAsync("https://api.github.com/repos/tailwindlabs/heroicons/releases/latest");
-        using var doc = JsonDocument.Parse(json);
-        var version = doc.RootElement.GetProperty("tag_name").GetString()!;
-        var tarballUrl = doc.RootElement.GetProperty("tarball_url").GetString()!;
-
-        Console.WriteLine($"Downloading {version}...");
+        var release = await releaseProvider.GetLatestReleaseAsync();
+        Console.WriteLine($"Downloading {release.Version}...");
 
         var generator = new IconGenerator(rootPath);
 
         // Update readme badge and version file
-        generator.UpdateReadme(version);
+        generator.UpdateReadme(release.Version);
 
         // Download and extract tarball
-        Directory.CreateDirectory(tmpDir);
-        await using var tarballStream = await http.GetStreamAsync(tarballUrl);
-        await using var gzipStream = new GZipStream(tarballStream, CompressionMode.Decompress);
-        await TarFile.ExtractToDirectoryAsync(gzipStream, tmpDir, overwriteFiles: true);
-
-        // Find the optimized directory inside the extracted content
-        var optimizedDir = Directory.GetDirectories(tmpDir)
-            .Select(d => Path.Combine(d, "optimized"))
-            .FirstOrDefault(Directory.Exists)
-            ?? throw new DirectoryNotFoundException("Could not find optimized/ directory in extracted tarball.");
+        var optimizedDir = await releaseProvider.DownloadAndExtractAsync(release.TarballUrl, tmpDir);
 
         Console.WriteLine("Looping through svg files and creating razor components...");
         var iconSets = new (string iconType, string svgDir)[]

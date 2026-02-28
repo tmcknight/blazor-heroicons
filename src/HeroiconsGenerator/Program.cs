@@ -7,6 +7,7 @@ if (!File.Exists(Path.Combine(root, "Blazor.Heroicons.sln")))
     return 1;
 }
 
-var updater = new HeroiconsUpdater(root);
+using var releaseProvider = new GitHubReleaseProvider();
+var updater = new HeroiconsUpdater(root, releaseProvider);
 await updater.RunAsync();
 return 0;
