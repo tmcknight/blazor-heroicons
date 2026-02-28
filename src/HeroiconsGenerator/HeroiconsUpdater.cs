@@ -31,13 +31,7 @@ internal class HeroiconsUpdater(string rootPath, IReleaseProvider releaseProvide
             var optimizedDir = await releaseProvider.DownloadAndExtractAsync(release.TarballUrl, tmpDir);
 
             Console.WriteLine("Looping through svg files and creating razor components...");
-            var iconSets = new (string iconType, string svgDir)[]
-            {
-                ("Micro", Path.Combine(optimizedDir, "16", "solid")),
-                ("Mini", Path.Combine(optimizedDir, "20", "solid")),
-                ("Solid", Path.Combine(optimizedDir, "24", "solid")),
-                ("Outline", Path.Combine(optimizedDir, "24", "outline")),
-            };
+            var iconSets = IconSetDefinitions.Resolve(optimizedDir);
 
             foreach (var (iconType, svgDir) in iconSets)
                 componentGenerator.CreateBlazorComponents(iconType, svgDir);
@@ -45,9 +39,10 @@ internal class HeroiconsUpdater(string rootPath, IReleaseProvider releaseProvide
             // Generate static registry
             registryGenerator.GenerateHeroiconRegistry(iconSets);
 
-            // Update HeroiconName.cs
+            // Update HeroiconName.cs — use Mini (20/solid) as the canonical icon name source
             Console.WriteLine("Updating HeroiconName class");
-            registryGenerator.UpdateHeroiconNameClass(Path.Combine(optimizedDir, "20", "solid"));
+            var miniDef = IconSetDefinitions.All.First(d => d.IconType == "Mini");
+            registryGenerator.UpdateHeroiconNameClass(Path.Combine(optimizedDir, miniDef.RelativePath));
 
             Console.WriteLine("Done!");
         }
