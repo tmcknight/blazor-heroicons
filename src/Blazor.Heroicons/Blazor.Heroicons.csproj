@@ -5,7 +5,6 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Version>2.2.0</Version>
 		<Authors>Tom McKnight</Authors>
 		<PackageProjectUrl>https://github.com/tmcknight/blazor-heroicons</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/tmcknight/blazor-heroicons</RepositoryUrl>
