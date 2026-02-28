@@ -17,7 +17,7 @@ public class IconGeneratorTests
 	[DataRow("single", "Single")]
 	public void ToPascalCase_ConvertsHyphenatedNames(string input, string expected)
 	{
-		Assert.AreEqual(expected, IconGenerator.ToPascalCase(input));
+		Assert.AreEqual(expected, NamingHelper.ToPascalCase(input));
 	}
 
 	[TestMethod]
@@ -25,7 +25,7 @@ public class IconGeneratorTests
 	[DataRow("mixed-hyphen_underscore", "MixedHyphenUnderscore")]
 	public void ToPascalCase_ConvertsUnderscores(string input, string expected)
 	{
-		Assert.AreEqual(expected, IconGenerator.ToPascalCase(input));
+		Assert.AreEqual(expected, NamingHelper.ToPascalCase(input));
 	}
 
 	[TestMethod]
@@ -36,9 +36,9 @@ public class IconGeneratorTests
 	[DataRow("building-office-2", "BuildingOffice2")]
 	[DataRow("h1", "H1")]
 	[DataRow("equals", "Equals")]
-	public void ToTitleCase_ConvertsHyphenatedNames(string input, string expected)
+	public void ToPascalCase_ConvertsForTitleUse(string input, string expected)
 	{
-		Assert.AreEqual(expected, IconGenerator.ToTitleCase(input));
+		Assert.AreEqual(expected, NamingHelper.ToPascalCase(input));
 	}
 
 	[TestMethod]
@@ -127,7 +127,7 @@ public class IconGeneratorTests
 		try
 		{
 			// Act
-			var generator = new IconGenerator(tmpRoot);
+			var generator = new RegistryGenerator(tmpRoot);
 			generator.UpdateHeroiconNameClass(svgDir);
 
 			// Assert
@@ -164,7 +164,7 @@ public class IconGeneratorTests
 		try
 		{
 			// Act
-			var generator = new IconGenerator(tmpRoot);
+			var generator = new RegistryGenerator(tmpRoot);
 			generator.UpdateHeroiconNameClass(svgDir);
 
 			// Assert
@@ -199,7 +199,7 @@ public class IconGeneratorTests
 		try
 		{
 			// Act
-			var generator = new IconGenerator(tmpRoot);
+			var generator = new RegistryGenerator(tmpRoot);
 			generator.GenerateHeroiconRegistry([
 				("Solid", svgDir1),
 				("Outline", svgDir2),
@@ -245,8 +245,8 @@ public class IconGeneratorTests
 		try
 		{
 			// Act
-			var generator = new IconGenerator(tmpRoot);
-			generator.UpdateReadme("v2.5.0");
+			var updater = new ReadmeUpdater(tmpRoot);
+			updater.UpdateReadme("v2.5.0");
 
 			// Assert
 			var lines = File.ReadAllLines(Path.Combine(tmpRoot, "README.md"));
@@ -281,8 +281,8 @@ public class IconGeneratorTests
 		try
 		{
 			// Act
-			var generator = new IconGenerator(tmpRoot);
-			generator.UpdateReadme("v2.0.0");
+			var updater = new ReadmeUpdater(tmpRoot);
+			updater.UpdateReadme("v2.0.0");
 
 			// Assert
 			var lines = File.ReadAllLines(Path.Combine(tmpRoot, "README.md"));

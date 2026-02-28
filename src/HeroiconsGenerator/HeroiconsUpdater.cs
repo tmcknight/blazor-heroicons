@@ -20,10 +20,12 @@ internal class HeroiconsUpdater(string rootPath, IReleaseProvider releaseProvide
             var release = await releaseProvider.GetLatestReleaseAsync();
             Console.WriteLine($"Downloading {release.Version}...");
 
-            var generator = new IconGenerator(rootPath);
+            var readmeUpdater = new ReadmeUpdater(rootPath);
+            var componentGenerator = new IconGenerator(rootPath);
+            var registryGenerator = new RegistryGenerator(rootPath);
 
             // Update readme badge and version file
-            generator.UpdateReadme(release.Version);
+            readmeUpdater.UpdateReadme(release.Version);
 
             // Download and extract tarball
             var optimizedDir = await releaseProvider.DownloadAndExtractAsync(release.TarballUrl, tmpDir);
@@ -38,14 +40,14 @@ internal class HeroiconsUpdater(string rootPath, IReleaseProvider releaseProvide
             };
 
             foreach (var (iconType, svgDir) in iconSets)
-                generator.CreateBlazorComponents(iconType, svgDir);
+                componentGenerator.CreateBlazorComponents(iconType, svgDir);
 
             // Generate static registry
-            generator.GenerateHeroiconRegistry(iconSets);
+            registryGenerator.GenerateHeroiconRegistry(iconSets);
 
             // Update HeroiconName.cs
             Console.WriteLine("Updating HeroiconName class");
-            generator.UpdateHeroiconNameClass(Path.Combine(optimizedDir, "20", "solid"));
+            registryGenerator.UpdateHeroiconNameClass(Path.Combine(optimizedDir, "20", "solid"));
 
             Console.WriteLine("Done!");
         }
