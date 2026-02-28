@@ -14,6 +14,7 @@
 		<PackageTags>Heroicons;Icons;Tailwind;TailwindCSS;Blazor</PackageTags>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<IsTrimmable>true</IsTrimmable>
 	</PropertyGroup>
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
