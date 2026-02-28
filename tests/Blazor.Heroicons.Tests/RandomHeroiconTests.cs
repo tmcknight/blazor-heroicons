@@ -1,14 +1,14 @@
 namespace Blazor.Heroicons.Tests;
 
 [TestClass]
-public class RandomHeroiconTests : BunitTestContext
+public class RandomHeroiconTests : BunitContext
 {
     [TestMethod]
     public void RendersWithDefaultAttributes()
     {
         // Arrange 
         //Act
-        var cut = RenderComponent<RandomHeroicon>();
+        var cut = Render<RandomHeroicon>();
         // Assert
         Assert.IsFalse(cut.Find("svg").HasAttribute("class"));
         Assert.AreEqual(HeroiconType.Outline, cut.Instance.Type);
@@ -18,12 +18,12 @@ public class RandomHeroiconTests : BunitTestContext
     public void ChangingIconTypeGetsNewRandom()
     {
         // Arrange 
-        var cut = RenderComponent<RandomHeroicon>();
+        var cut = Render<RandomHeroicon>();
         var originalType = cut.Instance.Type;
         // Assert
         Assert.AreEqual(HeroiconType.Outline, cut.Instance.Type);
         //Act
-        cut.SetParametersAndRender(parameters => parameters
+        cut.Render(parameters => parameters
             .Add(p => p.Type, HeroiconType.Solid));
         //Assert
         Assert.AreNotEqual(originalType, cut.Instance.Type);
@@ -33,12 +33,12 @@ public class RandomHeroiconTests : BunitTestContext
     public void ChangingUnmatchedAttributeRetainsIcon()
     {
         // Arrange 
-        var cut = RenderComponent<RandomHeroicon>(parameters => parameters
+        var cut = Render<RandomHeroicon>(parameters => parameters
             .Add(p => p.Type, HeroiconType.Solid));
         var originalType = cut.Instance.Type;
 
         //Act
-        cut.SetParametersAndRender(parameters => parameters
+        cut.Render(parameters => parameters
             .AddUnmatched("class", "h-10 w-10"));
 
         // Assert
