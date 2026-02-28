@@ -32,7 +32,7 @@ Each icon is available in four styles:
 | **Mini** | `Blazor.Heroicons.Mini` | 20x20, filled | Smaller elements like buttons and form inputs |
 | **Micro** | `Blazor.Heroicons.Micro` | 16x16, filled | Tight, high-density UIs |
 
-[Browse the full list of 324 icons on heroicons.com &rarr;](https://heroicons.com)
+[Browse the full list of icons on heroicons.com &rarr;](https://heroicons.com)
 
 ## 🚀 Usage
 
