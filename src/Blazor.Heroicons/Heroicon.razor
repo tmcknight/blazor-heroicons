@@ -2,7 +2,7 @@
 @inherits HeroiconBase
 @if (_razorComponentType is not null)
 {
-    <DynamicComponent Type="_razorComponentType" Parameters="AdditionalAttributes"></DynamicComponent>
+    <DynamicComponent Type="_razorComponentType" Parameters="@(AdditionalAttributes.ToDictionary(k => k.Key, v => v.Value))"></DynamicComponent>
 }
 else
 {
