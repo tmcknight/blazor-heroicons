@@ -20,23 +20,28 @@ else
     private HeroiconType _heroiconType = HeroiconType.Outline;
     private Type? _razorComponentType;
 
+    /// <summary>
+    /// Optional seed for deterministic icon selection. Changing the seed picks a new icon.
+    /// </summary>
+    [Parameter]
+    public int? Seed { get; set; }
+    private int? _seed;
+
     private static readonly ConcurrentDictionary<HeroiconType, Type[]> _iconTypeCache = new();
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        //check to see if the icon parameters have changed
-        if (_razorComponentType is null || _heroiconType != Type)
+        if (_razorComponentType is null || _heroiconType != Type || _seed != Seed)
         {
             _heroiconType = Type;
-
-            //get random icon
-            _razorComponentType = GetRandomIcon(Type);
+            _seed = Seed;
+            _razorComponentType = GetRandomIcon(Type, Seed);
         }
     }
 
-    private static Type? GetRandomIcon(HeroiconType type)
+    private static Type? GetRandomIcon(HeroiconType type, int? seed)
     {
         var componentTypes = _iconTypeCache.GetOrAdd(type, t =>
             Assembly.GetExecutingAssembly().GetTypes()
@@ -46,7 +51,8 @@ else
         if (componentTypes.Length == 0)
             return null;
 
-        return componentTypes[Random.Shared.Next(componentTypes.Length)];
+        var random = seed.HasValue ? new Random(seed.Value) : Random.Shared;
+        return componentTypes[random.Next(componentTypes.Length)];
     }
 
 }
