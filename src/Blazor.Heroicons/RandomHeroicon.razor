@@ -2,7 +2,7 @@
 
 @if (_razorComponentType is not null)
 {
-    <DynamicComponent Type="_razorComponentType" Parameters="@(AdditionalAttributes.ToDictionary(k => k.Key, v => v.Value))"></DynamicComponent>
+    <DynamicComponent Type="_razorComponentType" Parameters="_parameters"></DynamicComponent>
 }
 else
 {
@@ -17,6 +17,8 @@ else
     public HeroiconType Type { get; set; } = HeroiconType.Outline;
     private HeroiconType _heroiconType = HeroiconType.Outline;
     private Type? _razorComponentType;
+    private IReadOnlyDictionary<string, object>? _lastAttributes;
+    private IDictionary<string, object>? _parameters;
 
     /// <summary>
     /// Optional seed for deterministic icon selection. Changing the seed picks a new icon.
@@ -34,6 +36,12 @@ else
             _heroiconType = Type;
             _seed = Seed;
             _razorComponentType = GetRandomIcon(Type, Seed);
+        }
+
+        if (_lastAttributes != AdditionalAttributes)
+        {
+            _lastAttributes = AdditionalAttributes;
+            _parameters = AdditionalAttributes.ToDictionary(k => k.Key, v => v.Value);
         }
     }
 
