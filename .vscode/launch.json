@@ -10,9 +10,9 @@
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/src/Blazor.Heroicons.Demo/bin/Debug/net6.0/Blazor.Heroicons.Demo.dll",
+      "program": "${workspaceFolder}/src/DemoWebApp/DemoWebApp/bin/Debug/net10.0/DemoWebApp.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/src/Blazor.Heroicons.Demo",
+      "cwd": "${workspaceFolder}/src/DemoWebApp/DemoWebApp",
       "stopAtEntry": false,
       // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
       "serverReadyAction": {

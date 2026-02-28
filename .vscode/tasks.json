@@ -7,7 +7,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/src/Blazor.Heroicons.Demo/Blazor.Heroicons.Demo.csproj",
+        "${workspaceFolder}/src/DemoWebApp/DemoWebApp/DemoWebApp.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -19,7 +19,7 @@
       "type": "process",
       "args": [
         "publish",
-        "${workspaceFolder}/src/Blazor.Heroicons.Demo/Blazor.Heroicons.Demo.csproj",
+        "${workspaceFolder}/src/DemoWebApp/DemoWebApp/DemoWebApp.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -33,7 +33,7 @@
         "watch",
         "run",
         "--project",
-        "${workspaceFolder}/src/Blazor.Heroicons.Demo/Blazor.Heroicons.Demo.csproj"
+        "${workspaceFolder}/src/DemoWebApp/DemoWebApp/DemoWebApp.csproj"
       ],
       "problemMatcher": "$msCompile"
     }

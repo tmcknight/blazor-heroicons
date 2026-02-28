@@ -4,16 +4,16 @@ using System.Reflection;
 
 namespace Blazor.Heroicons.Tests;
 [TestClass]
-public class HeroiconTests : BunitTestContext
+public class HeroiconTests : BunitContext
 {
     [TestMethod]
     public void RendersWithDefaultAttributes()
     {
         // Arrange 
         //Act
-        var cut = RenderComponent<Heroicon>();
+        var cut = Render<Heroicon>();
         // Assert
-        var sparklesIcon = RenderComponent<SparklesIcon>();
+        var sparklesIcon = Render<SparklesIcon>();
         Assert.IsFalse(cut.Find("svg").HasAttribute("class"));
         Assert.AreEqual(HeroiconName.Sparkles, cut.Instance.Name);
         Assert.AreEqual(HeroiconType.Outline, cut.Instance.Type);
@@ -25,7 +25,7 @@ public class HeroiconTests : BunitTestContext
     {
         // Arrange
         // Act
-        var cut = RenderComponent<Heroicon>(parameters => parameters
+        var cut = Render<Heroicon>(parameters => parameters
             .AddUnmatched("added-attribute", "wahoo"));
 
         // Assert
@@ -38,9 +38,9 @@ public class HeroiconTests : BunitTestContext
         // Arrange
         var iconName = "MythicalIcon";
         // Act
-        var cut = RenderComponent<Heroicon>(parameters => parameters
+        var cut = Render<Heroicon>(parameters => parameters
             .Add(p => p.Name, iconName));
-        var questionMark = RenderComponent<QuestionMarkCircleIcon>();
+        var questionMark = Render<QuestionMarkCircleIcon>();
         //Assert
         Assert.AreEqual(questionMark.Markup, cut.Markup);
     }
@@ -54,7 +54,7 @@ public class HeroiconTests : BunitTestContext
     {
         // Arrange
         // Act
-        var cut = RenderComponent<Heroicon>(parameters => parameters
+        var cut = Render<Heroicon>(parameters => parameters
             .Add(p => p.Name, iconName));
         //Assert
         cut.MarkupMatches("<svg diff:ignore></svg>");
@@ -76,7 +76,7 @@ public class HeroiconTests : BunitTestContext
         foreach (var icon in icons)
         {
             // Act
-            var cut = RenderComponent<DynamicComponent>(parameters => parameters
+            var cut = Render<DynamicComponent>(parameters => parameters
                 .Add(p => p.Type, icon));
             //Assert
             cut.MarkupMatches("<svg diff:ignore></svg>");
@@ -88,11 +88,11 @@ public class HeroiconTests : BunitTestContext
     {
         // Arrange 
         //Act
-        var cut = RenderComponent<Heroicon>();
+        var cut = Render<Heroicon>();
         // Assert
         Assert.AreEqual(HeroiconName.Sparkles, cut.Instance.Name);
         var sparkles = cut.Markup;
-        cut.SetParametersAndRender(parameters => parameters
+        cut.Render(parameters => parameters
             .Add(p => p.Name, "HandThumbUpIcon"));
         Assert.AreEqual("HandThumbUpIcon", cut.Instance.Name);
         Assert.AreNotEqual(sparkles, cut.Markup);
@@ -103,11 +103,11 @@ public class HeroiconTests : BunitTestContext
     {
         // Arrange 
         //Act
-        var cut = RenderComponent<Heroicon>();
+        var cut = Render<Heroicon>();
         // Assert
         Assert.AreEqual(HeroiconType.Outline, cut.Instance.Type);
         var sparkles = cut.Markup;
-        cut.SetParametersAndRender(parameters => parameters
+        cut.Render(parameters => parameters
             .Add(p => p.Type, HeroiconType.Solid));
         Assert.AreEqual(HeroiconType.Solid, cut.Instance.Type);
         Assert.AreNotEqual(sparkles, cut.Markup);
@@ -117,12 +117,12 @@ public class HeroiconTests : BunitTestContext
     public void ChangingUnmatchedAttributeRetainsIcon()
     {
         // Arrange 
-        var cut = RenderComponent<Heroicon>(parameters => parameters
+        var cut = Render<Heroicon>(parameters => parameters
             .Add(p => p.Name, "HandThumbUpIcon")
             .Add(p => p.Type, HeroiconType.Solid));
 
         //Act
-        cut.SetParametersAndRender(parameters => parameters
+        cut.Render(parameters => parameters
             .AddUnmatched("class", "h-10 w-10"));
 
         // Assert
