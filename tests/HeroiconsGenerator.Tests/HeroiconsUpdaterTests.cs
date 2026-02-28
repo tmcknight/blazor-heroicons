@@ -41,118 +41,89 @@ public class HeroiconsUpdaterTests
         }
     }
 
-    private string CreateTestRoot()
+    private static TempDirectory CreateTestRoot()
     {
-        var tmpRoot = Path.Combine(Path.GetTempPath(), $"heroicons-updater-test-{Guid.NewGuid():N}");
-        Directory.CreateDirectory(tmpRoot);
+        var tmp = new TempDirectory("heroicons-updater-test");
 
         // Create required project structure
-        Directory.CreateDirectory(Path.Combine(tmpRoot, "src", "Blazor.Heroicons"));
+        tmp.CreateSubdirectory("src", "Blazor.Heroicons");
 
         // Create a README with a badge line
-        File.WriteAllLines(Path.Combine(tmpRoot, "README.md"),
+        File.WriteAllLines(Path.Combine(tmp.Path, "README.md"),
         [
             "# Blazor Heroicons",
             "[![Heroicons version](https://img.shields.io/badge/heroicons-v1.0.0-informational?style=flat-square)](https://github.com/tailwindlabs/heroicons/releases/tag/v1.0.0)",
             "Some other content"
         ]);
 
-        return tmpRoot;
+        return tmp;
     }
 
     [TestMethod]
     public async Task RunAsync_CreatesBlazorComponentsForAllIconSets()
     {
-        var tmpRoot = CreateTestRoot();
-        try
-        {
-            var provider = new FakeReleaseProvider();
-            var updater = new HeroiconsUpdater(tmpRoot, provider);
-            await updater.RunAsync();
+        using var tmp = CreateTestRoot();
+        var provider = new FakeReleaseProvider();
+        var updater = new HeroiconsUpdater(tmp.Path, provider);
+        await updater.RunAsync();
 
-            var heroiconsDir = Path.Combine(tmpRoot, "src", "Blazor.Heroicons");
-            foreach (var iconType in new[] { "Micro", "Mini", "Solid", "Outline" })
-            {
-                var dir = Path.Combine(heroiconsDir, iconType);
-                Assert.IsTrue(Directory.Exists(dir), $"{iconType} directory should exist");
-                var files = Directory.GetFiles(dir, "*.razor");
-                Assert.AreEqual(2, files.Length, $"{iconType} should have 2 razor files");
-            }
-        }
-        finally
+        var heroiconsDir = Path.Combine(tmp.Path, "src", "Blazor.Heroicons");
+        foreach (var iconType in new[] { "Micro", "Mini", "Solid", "Outline" })
         {
-            Directory.Delete(tmpRoot, true);
+            var dir = Path.Combine(heroiconsDir, iconType);
+            Assert.IsTrue(Directory.Exists(dir), $"{iconType} directory should exist");
+            var files = Directory.GetFiles(dir, "*.razor");
+            Assert.AreEqual(2, files.Length, $"{iconType} should have 2 razor files");
         }
     }
 
     [TestMethod]
     public async Task RunAsync_UpdatesReadmeAndVersionFile()
     {
-        var tmpRoot = CreateTestRoot();
-        try
-        {
-            var provider = new FakeReleaseProvider { Version = "v2.5.0" };
-            var updater = new HeroiconsUpdater(tmpRoot, provider);
-            await updater.RunAsync();
+        using var tmp = CreateTestRoot();
+        var provider = new FakeReleaseProvider { Version = "v2.5.0" };
+        var updater = new HeroiconsUpdater(tmp.Path, provider);
+        await updater.RunAsync();
 
-            var readme = File.ReadAllText(Path.Combine(tmpRoot, "README.md"));
-            Assert.IsTrue(readme.Contains("v2.5.0"), "README should contain new version");
+        var readme = File.ReadAllText(Path.Combine(tmp.Path, "README.md"));
+        Assert.IsTrue(readme.Contains("v2.5.0"), "README should contain new version");
 
-            var versionFile = File.ReadAllText(Path.Combine(tmpRoot, ".heroicons-version"));
-            Assert.AreEqual("v2.5.0", versionFile);
-        }
-        finally
-        {
-            Directory.Delete(tmpRoot, true);
-        }
+        var versionFile = File.ReadAllText(Path.Combine(tmp.Path, ".heroicons-version"));
+        Assert.AreEqual("v2.5.0", versionFile);
     }
 
     [TestMethod]
     public async Task RunAsync_CleansUpTempDirectory()
     {
-        var tmpRoot = CreateTestRoot();
-        try
-        {
-            var provider = new FakeReleaseProvider();
-            var updater = new HeroiconsUpdater(tmpRoot, provider);
-            await updater.RunAsync();
+        using var tmp = CreateTestRoot();
+        var provider = new FakeReleaseProvider();
+        var updater = new HeroiconsUpdater(tmp.Path, provider);
+        await updater.RunAsync();
 
-            var tmpDir = Path.Combine(tmpRoot, "tmp");
-            Assert.IsFalse(Directory.Exists(tmpDir), "tmp directory should be cleaned up after run");
-        }
-        finally
-        {
-            Directory.Delete(tmpRoot, true);
-        }
+        var tmpDir = Path.Combine(tmp.Path, "tmp");
+        Assert.IsFalse(Directory.Exists(tmpDir), "tmp directory should be cleaned up after run");
     }
 
     [TestMethod]
     public async Task RunAsync_GeneratesRegistryAndNameClass()
     {
-        var tmpRoot = CreateTestRoot();
-        try
-        {
-            var provider = new FakeReleaseProvider();
-            var updater = new HeroiconsUpdater(tmpRoot, provider);
-            await updater.RunAsync();
+        using var tmp = CreateTestRoot();
+        var provider = new FakeReleaseProvider();
+        var updater = new HeroiconsUpdater(tmp.Path, provider);
+        await updater.RunAsync();
 
-            var heroiconsDir = Path.Combine(tmpRoot, "src", "Blazor.Heroicons");
+        var heroiconsDir = Path.Combine(tmp.Path, "src", "Blazor.Heroicons");
 
-            var registryPath = Path.Combine(heroiconsDir, "HeroiconRegistry.cs");
-            Assert.IsTrue(File.Exists(registryPath), "HeroiconRegistry.cs should be generated");
-            var registryContent = File.ReadAllText(registryPath);
-            Assert.IsTrue(registryContent.Contains("internal static class HeroiconRegistry"));
+        var registryPath = Path.Combine(heroiconsDir, "HeroiconRegistry.cs");
+        Assert.IsTrue(File.Exists(registryPath), "HeroiconRegistry.cs should be generated");
+        var registryContent = File.ReadAllText(registryPath);
+        Assert.IsTrue(registryContent.Contains("internal static class HeroiconRegistry"));
 
-            var namePath = Path.Combine(heroiconsDir, "HeroiconName.cs");
-            Assert.IsTrue(File.Exists(namePath), "HeroiconName.cs should be generated");
-            var nameContent = File.ReadAllText(namePath);
-            Assert.IsTrue(nameContent.Contains("public static class HeroiconName"));
-            Assert.IsTrue(nameContent.Contains("ArrowDown"));
-            Assert.IsTrue(nameContent.Contains("HandThumbUp"));
-        }
-        finally
-        {
-            Directory.Delete(tmpRoot, true);
-        }
+        var namePath = Path.Combine(heroiconsDir, "HeroiconName.cs");
+        Assert.IsTrue(File.Exists(namePath), "HeroiconName.cs should be generated");
+        var nameContent = File.ReadAllText(namePath);
+        Assert.IsTrue(nameContent.Contains("public static class HeroiconName"));
+        Assert.IsTrue(nameContent.Contains("ArrowDown"));
+        Assert.IsTrue(nameContent.Contains("HandThumbUp"));
     }
 }
