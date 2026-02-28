@@ -47,10 +47,19 @@ internal class HeroiconsUpdater(string rootPath)
             ?? throw new DirectoryNotFoundException("Could not find optimized/ directory in extracted tarball.");
 
         Console.WriteLine("Looping through svg files and creating razor components...");
-        generator.CreateBlazorComponents("Micro", Path.Combine(optimizedDir, "16", "solid"));
-        generator.CreateBlazorComponents("Mini", Path.Combine(optimizedDir, "20", "solid"));
-        generator.CreateBlazorComponents("Solid", Path.Combine(optimizedDir, "24", "solid"));
-        generator.CreateBlazorComponents("Outline", Path.Combine(optimizedDir, "24", "outline"));
+        var iconSets = new (string iconType, string svgDir)[]
+        {
+            ("Micro", Path.Combine(optimizedDir, "16", "solid")),
+            ("Mini", Path.Combine(optimizedDir, "20", "solid")),
+            ("Solid", Path.Combine(optimizedDir, "24", "solid")),
+            ("Outline", Path.Combine(optimizedDir, "24", "outline")),
+        };
+
+        foreach (var (iconType, svgDir) in iconSets)
+            generator.CreateBlazorComponents(iconType, svgDir);
+
+        // Generate static registry
+        generator.GenerateHeroiconRegistry(iconSets);
 
         // Update HeroiconName.cs
         Console.WriteLine("Updating HeroiconName class");

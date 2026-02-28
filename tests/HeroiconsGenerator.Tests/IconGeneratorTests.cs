@@ -181,6 +181,54 @@ public class IconGeneratorTests
 	}
 
 	[TestMethod]
+	public void GenerateHeroiconRegistry_ProducesCorrectOutput()
+	{
+		// Arrange
+		var tmpRoot = Path.Combine(Path.GetTempPath(), $"heroicons-test-{Guid.NewGuid():N}");
+		var heroiconsDir = Path.Combine(tmpRoot, "src", "Blazor.Heroicons");
+		var svgDir1 = Path.Combine(tmpRoot, "svgs", "solid");
+		var svgDir2 = Path.Combine(tmpRoot, "svgs", "outline");
+		Directory.CreateDirectory(heroiconsDir);
+		Directory.CreateDirectory(svgDir1);
+		Directory.CreateDirectory(svgDir2);
+
+		File.WriteAllText(Path.Combine(svgDir1, "arrow-down.svg"), "<svg/>");
+		File.WriteAllText(Path.Combine(svgDir1, "hand-thumb-up.svg"), "<svg/>");
+		File.WriteAllText(Path.Combine(svgDir2, "arrow-down.svg"), "<svg/>");
+
+		try
+		{
+			// Act
+			var generator = new IconGenerator(tmpRoot);
+			generator.GenerateHeroiconRegistry([
+				("Solid", svgDir1),
+				("Outline", svgDir2),
+			]);
+
+			// Assert
+			var outputPath = Path.Combine(heroiconsDir, "HeroiconRegistry.cs");
+			Assert.IsTrue(File.Exists(outputPath));
+
+			var content = File.ReadAllText(outputPath);
+			Assert.IsTrue(content.Contains("using System.Collections.Frozen;"));
+			Assert.IsTrue(content.Contains("internal static class HeroiconRegistry"));
+			Assert.IsTrue(content.Contains("StringComparer.OrdinalIgnoreCase"),
+				"Registry should use case-insensitive keys");
+			Assert.IsTrue(content.Contains("\"Blazor.Heroicons.Solid.ArrowDownIcon\", typeof(Solid.ArrowDownIcon)"));
+			Assert.IsTrue(content.Contains("\"Blazor.Heroicons.Solid.HandThumbUpIcon\", typeof(Solid.HandThumbUpIcon)"));
+			Assert.IsTrue(content.Contains("\"Blazor.Heroicons.Outline.ArrowDownIcon\", typeof(Outline.ArrowDownIcon)"));
+			Assert.IsTrue(content.Contains("HeroiconType.Solid"));
+			Assert.IsTrue(content.Contains("HeroiconType.Outline"));
+			Assert.IsTrue(content.Contains("Resolve(string key)"));
+			Assert.IsTrue(content.Contains("GetAll(HeroiconType type)"));
+		}
+		finally
+		{
+			Directory.Delete(tmpRoot, true);
+		}
+	}
+
+	[TestMethod]
 	public void UpdateReadme_UpdatesBadgeAndVersionFile()
 	{
 		// Arrange
