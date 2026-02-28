@@ -1,7 +1,13 @@
+using System.Text.RegularExpressions;
+
 namespace HeroiconsGenerator;
 
-internal class IconGenerator(string rootPath)
+internal partial class IconGenerator(string rootPath)
 {
+    // Matches the closing > of the opening <svg ...> tag
+    [GeneratedRegex(@"(<svg\b[^>]*)(>)")]
+    private static partial Regex SvgOpeningTagRegex();
+
     public void CreateBlazorComponents(string iconType, string svgDir)
     {
         Console.WriteLine($"Creating {iconType} razor components...");
@@ -15,9 +21,8 @@ internal class IconGenerator(string rootPath)
         foreach (var file in svgFiles)
         {
             var svgContent = File.ReadAllText(file);
-            var content = "@inherits HeroiconBase\n" + svgContent.Replace(
-                "aria-hidden=\"true\"",
-                "aria-hidden=\"true\" @attributes=\"AdditionalAttributes\"");
+            var content = "@inherits HeroiconBase\n" +
+                SvgOpeningTagRegex().Replace(svgContent, "$1 @attributes=\"AdditionalAttributes\"$2", count: 1);
 
             var name = NamingHelper.ToPascalCase(Path.GetFileNameWithoutExtension(file));
             File.WriteAllText(Path.Combine(componentDir, $"{name}Icon.razor"), content);
