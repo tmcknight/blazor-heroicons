@@ -13,6 +13,8 @@
 [![License](https://img.shields.io/github/license/tmcknight/Blazor.Heroicons?style=flat-square)](LICENSE)
 [![Build and test](https://img.shields.io/github/actions/workflow/status/tmcknight/Blazor.Heroicons/dotnet.yml?branch=main&style=flat-square&logo=github&label=tests)](https://github.com/tmcknight/Blazor.Heroicons/actions/workflows/dotnet.yml)
 
+[**Live Demo**](https://blazor-heroicons.tmcknight.dev) — Browse and preview all available icons
+
 ## 📦 Installation
 
 ```sh
@@ -32,7 +34,7 @@ Each icon is available in four styles:
 | **Mini** | `Blazor.Heroicons.Mini` | 20x20, filled | Smaller elements like buttons and form inputs |
 | **Micro** | `Blazor.Heroicons.Micro` | 16x16, filled | Tight, high-density UIs |
 
-[Browse the full list of icons on heroicons.com &rarr;](https://heroicons.com)
+[Browse the full list of icons on the demo site &rarr;](https://blazor-heroicons.tmcknight.dev)
 
 ## 🚀 Usage
 
