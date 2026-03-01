@@ -1,0 +1,182 @@
+@page "/"
+@inject IJSRuntime JS
+
+<!-- Header -->
+<header class="border-b border-surface-3">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+        <div>
+            <div class="flex items-center gap-4">
+                <h1 class="text-3xl font-semibold tracking-tight text-white flex items-center gap-3">
+                    <img src="icon.png" alt="" class="w-8 h-8" />
+                    Blazor<span class="text-accent">.</span>Heroicons
+                </h1>
+                <a href="https://github.com/tmcknight/blazor-heroicons#readme"
+                   target="_blank"
+                   class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-2 border border-surface-4 text-xs text-neutral-300 hover:text-white hover:border-neutral-500 transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" /></svg>
+                    Documentation
+                </a>
+            </div>
+            <p class="text-sm text-neutral-500 mt-1.5 font-light">Browse, search, and copy — <span class="font-mono text-xs text-neutral-400">@allIconNames.Length</span> icons</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="https://heroicons.com" target="_blank" title="Heroicons"
+               class="opacity-50 hover:opacity-100 transition-opacity">
+                <img src="icon.png" alt="Heroicons" class="w-6 h-6" />
+            </a>
+            <a href="https://github.com/tmcknight/blazor-heroicons" target="_blank" title="GitHub"
+               class="text-neutral-500 hover:text-white transition-colors">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" /></svg>
+            </a>
+        </div>
+    </div>
+</header>
+
+<div class="max-w-7xl mx-auto px-6 pt-6 pb-16">
+    <!-- Controls bar -->
+    <div class="sticky top-0 z-10 bg-surface-0/95 backdrop-blur-sm pb-5 pt-2 -mx-6 px-6 border-b border-surface-2 mb-6">
+        <div class="flex flex-col sm:flex-row gap-3">
+            <!-- Search -->
+            <div class="relative flex-1">
+                <div class="absolute inset-y-0 left-3.5 flex items-center pointer-events-none text-neutral-500">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                </div>
+                <input type="text"
+                       @bind="searchQuery"
+                       @bind:event="oninput"
+                       placeholder="Search icons..."
+                       class="w-full pl-10 pr-4 py-2.5 bg-surface-2 border border-surface-4 rounded-lg text-sm text-white focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-colors font-mono" />
+            </div>
+            <!-- Tabs -->
+            <div class="flex gap-1 p-1 bg-surface-2 rounded-lg self-start">
+                @foreach (var type in iconTypes)
+                {
+                    var isActive = type == selectedType;
+                    <button class="@(isActive ? "bg-surface-4 text-accent tab-active" : "text-neutral-400 hover:text-neutral-200") px-4 py-2 rounded-md text-xs font-mono font-medium transition-all cursor-pointer"
+                            @onclick="() => selectedType = type">
+                        @type
+                    </button>
+                }
+            </div>
+        </div>
+        <!-- Result count & type description -->
+        <div class="flex justify-between items-center mt-2">
+        <p class="text-xs text-neutral-600 font-mono">
+            @filteredIcons.Length
+            <span class="text-neutral-700">of</span>
+            @allIconNames.Length icons
+            @if (!string.IsNullOrWhiteSpace(searchQuery))
+            {
+                <span class="text-neutral-700">matching</span>
+                <span class="text-neutral-500">@($"\"{searchQuery}\"")</span>
+            }
+        </p>
+        <p class="text-xs text-neutral-500">@TypeDescription()</p>
+        </div>
+    </div>
+
+    <!-- Icon grid -->
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-x-6 gap-y-4 pb-16 pt-10 sm:pt-11 md:pt-12">
+        @foreach (var name in filteredIcons)
+        {
+            var iconName = name;
+            <div class="group flex flex-col items-center gap-1.5">
+                <div id="icon-@iconName"
+                     class="icon-card relative flex items-center justify-center w-full h-[8.5rem] rounded-xl bg-surface-2 border border-surface-3 hover:border-accent/30 cursor-default">
+                    <Heroicon Name="@iconName" Type="@selectedType" class="@($"{IconSizeClass()} text-neutral-300 group-hover:text-white transition-colors")" />
+                    <!-- Copy overlay -->
+                    <div class="overlay-enter absolute inset-0 flex flex-col rounded-xl overflow-hidden opacity-0 group-hover:opacity-100">
+                        <button class="flex-1 flex items-center justify-center text-xs font-mono font-medium text-neutral-300 bg-neutral-500/20 hover:bg-neutral-500/30 backdrop-blur-sm transition cursor-pointer border-b border-white/5"
+                                @onclick="() => CopySvg(iconName)">
+                            @(copiedIcon == iconName + ":svg" ? "Copied!" : "Copy SVG")
+                        </button>
+                        <button class="flex-1 flex items-center justify-center text-xs font-mono font-medium text-neutral-300 bg-neutral-500/20 hover:bg-neutral-500/30 backdrop-blur-sm transition cursor-pointer"
+                                @onclick="() => CopyMarkup(iconName)">
+                            @(copiedIcon == iconName + ":markup" ? "Copied!" : "Copy Razor")
+                        </button>
+                    </div>
+                </div>
+                <span class="mt-2 h-10 truncate text-center text-[0.6875rem] leading-5 text-neutral-600 font-mono w-full group-hover:line-clamp-2 group-hover:whitespace-normal">@iconName</span>
+            </div>
+        }
+    </div>
+
+    @if (filteredIcons.Length == 0)
+    {
+        <div class="flex flex-col items-center justify-center py-24 text-neutral-600">
+            <svg class="w-12 h-12 mb-4 text-neutral-700" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+            <p class="text-sm font-mono">No icons match <span class="text-neutral-400">@($"\"{searchQuery}\"")</span></p>
+        </div>
+    }
+</div>
+
+@code {
+    private static readonly HeroiconType[] iconTypes = [HeroiconType.Outline, HeroiconType.Solid, HeroiconType.Mini, HeroiconType.Micro];
+    private HeroiconType selectedType = HeroiconType.Outline;
+    private string searchQuery = "";
+    private string[] allIconNames = [];
+    private string? copiedIcon;
+
+    private string[] filteredIcons =>
+        string.IsNullOrWhiteSpace(searchQuery)
+            ? allIconNames
+            : allIconNames.Where(n => n.Contains(searchQuery, StringComparison.OrdinalIgnoreCase)).ToArray();
+
+    protected override void OnInitialized()
+    {
+        allIconNames = typeof(HeroiconName)
+            .GetFields(BindingFlags.Public | BindingFlags.Static)
+            .Where(f => f.IsLiteral)
+            .Select(f => (string)f.GetValue(null)!)
+            .Order()
+            .ToArray();
+    }
+
+    private string TypeDescription() => selectedType switch
+    {
+        HeroiconType.Outline => "24x24, 1.5px stroke",
+        HeroiconType.Solid => "24x24, Solid fill",
+        HeroiconType.Mini => "20x20, Solid fill",
+        HeroiconType.Micro => "16x16, Solid fill",
+        _ => "",
+    };
+
+    private string IconSizeClass() => selectedType switch
+    {
+        HeroiconType.Mini => "size-5",
+        HeroiconType.Micro => "size-4",
+        _ => "size-6",
+    };
+
+    private async Task CopySvg(string name)
+    {
+        var svgHtml = await JS.InvokeAsync<string>("getSvgHtml", $"#icon-{name}");
+        if (svgHtml is null) return;
+        await JS.InvokeVoidAsync("navigator.clipboard.writeText", svgHtml);
+        await ShowCopiedFeedback(name + ":svg");
+    }
+
+    private async Task CopyMarkup(string name)
+    {
+        var typeName = selectedType.ToString();
+        var markup = $"<Heroicon Name=\"{name}\" Type=\"HeroiconType.{typeName}\" />";
+        await JS.InvokeVoidAsync("navigator.clipboard.writeText", markup);
+        await ShowCopiedFeedback(name + ":markup");
+    }
+
+    private async Task ShowCopiedFeedback(string key)
+    {
+        copiedIcon = key;
+        StateHasChanged();
+        await Task.Delay(1500);
+        if (copiedIcon == key)
+        {
+            copiedIcon = null;
+            StateHasChanged();
+        }
+    }
+}
