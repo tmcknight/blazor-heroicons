@@ -23,6 +23,11 @@
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 	<ItemGroup>
+		<EmbeddedResource Include="LinkerConfig.xml">
+			<LogicalName>Blazor.Heroicons.xml</LogicalName>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
 		<None Include="../../.github/icon.png" Pack="true" PackagePath="" />
 		<None Include="../../README.md" Pack="true" PackagePath="" />
 	</ItemGroup>
