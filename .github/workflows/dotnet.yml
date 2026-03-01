@@ -26,4 +26,4 @@ jobs:
       - name: Test
         run: dotnet test --no-build --verbosity normal
       - name: Build demo app
-        run: dotnet build src/DemoWebApp/DemoWebApp/DemoWebApp.csproj --no-restore --verbosity normal
+        run: dotnet build src/DemoWebApp/DemoWebApp.csproj --no-restore --verbosity normal
