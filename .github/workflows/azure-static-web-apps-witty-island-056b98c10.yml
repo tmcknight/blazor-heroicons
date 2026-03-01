@@ -2,15 +2,10 @@ name: Deploy Demo to Azure Static Web Apps
 
 on:
   push:
-    branches: [main]
-    tags: [ v* ]            # also deploy on version tags
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches: [main]
+    tags: [ v* ]
 
 jobs:
   build_and_deploy:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -31,14 +26,3 @@ jobs:
           action: "upload"
           skip_app_build: true
           app_location: "output/wwwroot"
-
-  close_pull_request:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Close staging environment
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_ISLAND_056B98C10 }}
-          action: "close"
-          app_location: ""
