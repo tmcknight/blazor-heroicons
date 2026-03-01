@@ -10,4 +10,9 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.0-*" />
 	</ItemGroup>
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="DemoWebApp.Client\obj\DemoWebApp.Client.csproj.nuget.dgspec.json" />
+	  <_ContentIncludedByDefault Remove="DemoWebApp.Client\obj\project.assets.json" />
+	  <_ContentIncludedByDefault Remove="DemoWebApp.Client\obj\project.packagespec.json" />
+	</ItemGroup>
 </Project>

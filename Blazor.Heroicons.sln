@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		.github\workflows\heroicons.yml = .github\workflows\heroicons.yml
 		.github\workflows\publish.yml = .github\workflows\publish.yml
+		.github\workflows\azure-static-web-apps-witty-island-056b98c10.yml = .github\workflows\azure-static-web-apps-witty-island-056b98c10.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeroiconsGenerator.Tests", "tests\HeroiconsGenerator.Tests\HeroiconsGenerator.Tests.csproj", "{F9BBD23B-916A-4CB3-B2C9-0ED4FC479295}"
