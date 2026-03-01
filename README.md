@@ -1,4 +1,4 @@
-![Blazor.Heroicons](.github/icon.png)
+![Blazor.Heroicons](https://raw.githubusercontent.com/tmcknight/blazor-heroicons/main/.github/icon.png)
 
 # Blazor.Heroicons
 
