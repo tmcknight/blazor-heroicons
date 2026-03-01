@@ -1,12 +1,8 @@
-<p align="center">
-  <img src=".github/icon.png" alt="Blazor.Heroicons" width="128" />
-</p>
+![Blazor.Heroicons](.github/icon.png)
 
-<h1 align="center">Blazor.Heroicons</h1>
+# Blazor.Heroicons
 
-<p align="center">
-  A third-party Blazor component library for <a href="https://heroicons.com">Heroicons</a> — beautiful hand-crafted SVG icons by the makers of Tailwind CSS.
-</p>
+A third-party Blazor component library for [Heroicons](https://heroicons.com) — beautiful hand-crafted SVG icons by the makers of Tailwind CSS.
 
 [![NuGet package](https://img.shields.io/nuget/v/Blazor.Heroicons?style=flat-square&logo=nuget)](https://www.nuget.org/packages/Blazor.Heroicons)
 [![Heroicons version](https://img.shields.io/badge/heroicons-v2.2.0-informational?style=flat-square)](https://github.com/tailwindlabs/heroicons/releases/tag/v2.2.0)
@@ -34,7 +30,7 @@ Each icon is available in four styles:
 | **Mini** | `Blazor.Heroicons.Mini` | 20x20, filled | Smaller elements like buttons and form inputs |
 | **Micro** | `Blazor.Heroicons.Micro` | 16x16, filled | Tight, high-density UIs |
 
-[Browse the full list of icons on the demo site &rarr;](https://blazor-heroicons.tmcknight.dev)
+[Browse the full list of icons on the demo site →](https://blazor-heroicons.tmcknight.dev)
 
 ## 🚀 Usage
 
